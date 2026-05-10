@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Payments Hub Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #F5F5F5; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Page Header */
+        .page-header { background: #003D7A; color: white; padding: 60px 40px; text-align: center; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 16px; }
+        .page-header p { font-size: 18px; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+
+        /* Payments Grid */
+        .payments-section { padding: 60px 40px; }
+        .payments-container { max-width: 1000px; margin: 0 auto; }
+        .payments-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        
+        .payment-card { background: white; border: 1px solid #E0E0E0; padding: 40px; text-align: center; transition: all 0.3s; border-top: 4px solid #00A0B0; }
+        .payment-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .payment-card.audit { border-top-color: #D4A574; }
+        
+        .payment-icon { width: 64px; height: 64px; background: #F5F5F5; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; }
+        .payment-card h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #003D7A; margin-bottom: 16px; }
+        .payment-card p { color: #666; margin-bottom: 32px; }
+        .payment-card .btn { display: inline-block; background: #00A0B0; color: white; padding: 12px 32px; text-decoration: none; font-weight: 700; transition: background 0.2s; }
+        .payment-card.audit .btn { background: #D4A574; }
+        .payment-card .btn:hover { opacity: 0.9; }
+
+        /* Security Note */
+        .security-note { max-width: 800px; margin: 60px auto 0; text-align: center; padding: 24px; background: white; border: 1px solid #E0E0E0; display: flex; align-items: center; justify-content: center; gap: 16px; }
+        .security-note p { font-size: 14px; color: #666; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; margin-top: 60px; }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .payments-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <div class="page-header">
+        <h1>Make a Payment</h1>
+        <p>Select the type of invoice you are paying to be directed to the correct secure payment portal.</p>
+    </div>
+
+    <section class="payments-section">
+        <div class="payments-container">
+            <div class="payments-grid">
+                <!-- Accounting Payment -->
+                <div class="payment-card">
+                    <div class="payment-icon"></div>
+                    <h2>Accounting & Advisory</h2>
+                    <p>Pay invoices related to tax, bookkeeping, business advisory, and general accounting services.</p>
+                    <a href="#" class="btn">Pay Accounting Invoice</a>
+                </div>
+
+                <!-- Audit Payment -->
+                <div class="payment-card audit">
+                    <div class="payment-icon"></div>
+                    <h2>Audit Services</h2>
+                    <p>Pay invoices specifically related to statutory audits, SMSF audits, and assurance services.</p>
+                    <a href="audit-payments.html" class="btn">Pay Audit Invoice</a>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-label">PAYMENTS DIRECTORY</div>
+                <strong>Purpose:</strong> Route users to the correct payment gateway (often different bank accounts for Audit vs General Accounting for compliance reasons).<br>
+                <strong>Design:</strong> Clear, distinct options. Audit uses Gold accent to differentiate from General Accounting (Teal).
+            </div>
+
+            <div class="security-note">
+                <div style="width: 24px; height: 24px; background: #4CAF50; border-radius: 50%;"></div>
+                <p>All payments are processed through a secure, encrypted gateway. We do not store your credit card information.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

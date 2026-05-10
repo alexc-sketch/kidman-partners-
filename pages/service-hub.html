@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Service Hub Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: 0 auto 32px; }
+
+        /* Services Grid */
+        .services-section { padding: 60px 40px; background: #F5F5F5; }
+        .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .service-card { background: #FFFFFF; border: 1px solid #E0E0E0; padding: 32px; transition: all 0.3s; display: flex; flex-direction: column; height: 100%; }
+        .service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-4px); border-color: #00A0B0; }
+        .service-card .icon { width: 48px; height: 48px; background: #00A0B0; margin-bottom: 24px; }
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: #003D7A; margin-bottom: 16px; }
+        .service-card p { font-size: 15px; color: #666; margin-bottom: 24px; flex-grow: 1; }
+        .service-card .features { list-style: none; margin-bottom: 24px; border-top: 1px solid #E0E0E0; padding-top: 16px; }
+        .service-card .features li { font-size: 13px; color: #444; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .service-card .features li::before { content: '→'; color: #D4A574; }
+        .service-card .btn { display: inline-block; padding: 10px 20px; border: 1px solid #00A0B0; color: #00A0B0; text-decoration: none; font-weight: 600; text-align: center; transition: all 0.2s; }
+        .service-card .btn:hover { background: #00A0B0; color: white; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .services-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Comprehensive Financial Expertise</h1>
+        <p>Advice when you need it, not just when you ask for it. We provide strategic accounting, wealth management, and lending solutions to navigate your next chapter.</p>
+        <div class="annotation">
+            <div class="annotation-label">HERO SECTION</div>
+            <strong>Design:</strong> Blue gradient background, centered text<br>
+            <strong>Typography:</strong> Playfair Display 48px (desktop), 36px (mobile)<br>
+            <strong>Copy:</strong> Updated to focus on proactive advice ("not just when you ask for it")
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Audit, Compliance & Assurance</h3>
+                <p>Rigorous statutory audits, internal controls reviews, and assurance services designed to ensure compliance while adding strategic value.</p>
+                <ul class="features">
+                    <li>Statutory Audits</li>
+                    <li>Internal Controls</li>
+                    <li>Risk Management</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Bookkeeping</h3>
+                <p>Optimise your operations with outsourced cloud bookkeeping, Xero integration, STP payroll processing, and precise management reporting.</p>
+                <ul class="features">
+                    <li>Cloud Bookkeeping</li>
+                    <li>Payroll Processing</li>
+                    <li>Management Reporting</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Business Advisory & Mentoring</h3>
+                <p>Strategic planning, cash flow forecasting, and succession planning to guide you through every stage of the business lifecycle.</p>
+                <ul class="features">
+                    <li>Strategic Planning</li>
+                    <li>Cash Flow Forecasting</li>
+                    <li>Succession Planning</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Lending</h3>
+                <p>Tailored commercial finance, business lending solutions, and residential mortgage brokering to efficiently fund your next stage of growth.</p>
+                <ul class="features">
+                    <li>Commercial Finance</li>
+                    <li>Business Lending</li>
+                    <li>Residential Mortgages</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>SMSF</h3>
+                <p>End-to-end Self-Managed Super Fund support, including seamless SMSF setup, ongoing administration, compliance, and strategic tax returns.</p>
+                <ul class="features">
+                    <li>SMSF Setup</li>
+                    <li>Ongoing Administration</li>
+                    <li>Compliance & Tax</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Taxation & Business Services</h3>
+                <p>Proactive tax planning for businesses, company tax returns, multi-entity structuring, and comprehensive compliance support.</p>
+                <ul class="features">
+                    <li>Tax Planning</li>
+                    <li>Company Tax Returns</li>
+                    <li>Multi-entity Structuring</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Wealth Management</h3>
+                <p>Holistic personal financial planning, retirement income strategies, and estate planning advice to protect and grow your family's wealth.</p>
+                <ul class="features">
+                    <li>Financial Planning</li>
+                    <li>Retirement Strategies</li>
+                    <li>Estate Planning</li>
+                </ul>
+                <a href="#" class="btn">Explore Service</a>
+            </div>
+        </div>
+        
+        <div class="annotation">
+            <div class="annotation-label">SERVICES GRID</div>
+            <strong>Layout:</strong> 3-column grid (desktop), 2-column (tablet), 1-column (mobile)<br>
+            <strong>Card Design:</strong> White background, sharp corners (0px radius), hover lift effect<br>
+            <strong>Enhancement:</strong> Added feature lists to each card to provide more context before clicking through<br>
+            <strong>Button:</strong> Ghost button style that fills on hover
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

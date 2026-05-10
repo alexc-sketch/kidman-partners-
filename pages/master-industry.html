@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Master Industry Template Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; display: flex; align-items: center; gap: 60px; }
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; margin-bottom: 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+        .hero-image { flex: 1; height: 400px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+
+        /* Industry Challenges */
+        .challenges { padding: 80px 40px; background: #F5F5F5; }
+        .challenges-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; }
+        .challenges-text h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; margin-bottom: 24px; }
+        .challenges-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .challenge-item { background: white; padding: 24px; border-left: 4px solid #D4A574; }
+        .challenge-item h3 { font-size: 18px; margin-bottom: 12px; color: #2E2E2E; }
+
+        /* Under One Roof (Cross-selling) */
+        .one-roof { padding: 80px 40px; }
+        .roof-container { max-width: 1200px; margin: 0 auto; }
+        .roof-header { text-align: center; margin-bottom: 60px; }
+        .roof-header h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; }
+        .roof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .roof-item { padding: 24px; border: 1px solid #E0E0E0; text-align: center; transition: all 0.3s; }
+        .roof-item:hover { border-color: #00A0B0; transform: translateY(-4px); }
+        .roof-icon { width: 48px; height: 48px; background: #00A0B0; margin: 0 auto 16px; }
+        .roof-item h3 { font-size: 18px; margin-bottom: 12px; }
+        .roof-item a { color: #00A0B0; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        /* Case Study / Social Proof */
+        .case-study { padding: 80px 40px; background: #003D7A; color: white; }
+        .cs-container { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .cs-quote { font-family: 'Playfair Display', serif; font-size: 28px; font-style: italic; margin-bottom: 32px; line-height: 1.4; }
+        .cs-author { font-weight: 700; font-size: 18px; }
+        .cs-company { color: #D4A574; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .hero { flex-direction: column; }
+            .challenges-container { grid-template-columns: 1fr; }
+            .roof-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .challenges-grid { grid-template-columns: 1fr; }
+            .roof-grid { grid-template-columns: 1fr; }
+            .cs-quote { font-size: 22px; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>[Industry Name]</h1>
+            <p>[Industry Value Proposition: e.g., "Specialised financial intelligence for the aged care sector. We provide the technical depth required to navigate complex regulatory landscapes."]</p>
+            <a href="#" class="btn">Book an Industry Consultation</a>
+        </div>
+        <div class="hero-image">
+            [Industry Context Image]
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">HERO SECTION (INDUSTRY TEMPLATE)</div>
+        <strong>Dynamic Content:</strong> Title, Value Prop, Image pulled from ACF fields<br>
+        <strong>Layout:</strong> 50/50 split on desktop, stacked on mobile<br>
+        <strong>Imagery:</strong> Must be highly specific to the industry (e.g., medical facility, construction site)
+    </div>
+
+    <section class="challenges">
+        <div class="challenges-container">
+            <div class="challenges-text">
+                <h2>Navigating Complexity with Confidence</h2>
+                <p>[Describe the specific regulatory, financial, or operational challenges unique to this industry. Show deep sector knowledge.]</p>
+                <p>Without precise financial oversight, operational risks can escalate quickly. We provide the clarity you need to maintain stability and focus on growth.</p>
+            </div>
+            <div class="challenges-grid">
+                <div class="challenge-item">
+                    <h3>[Specific Challenge 1]</h3>
+                    <p>[How we solve it]</p>
+                </div>
+                <div class="challenge-item">
+                    <h3>[Specific Challenge 2]</h3>
+                    <p>[How we solve it]</p>
+                </div>
+                <div class="challenge-item">
+                    <h3>[Specific Challenge 3]</h3>
+                    <p>[How we solve it]</p>
+                </div>
+                <div class="challenge-item">
+                    <h3>[Specific Challenge 4]</h3>
+                    <p>[How we solve it]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">INDUSTRY CHALLENGES</div>
+        <strong>Purpose:</strong> Demonstrate E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) by speaking directly to sector-specific pain points.<br>
+        <strong>Design:</strong> Left column sets the narrative, right column provides specific examples.
+    </div>
+
+    <section class="one-roof">
+        <div class="roof-container">
+            <div class="roof-header">
+                <h2>All Your Needs Under One Roof</h2>
+                <p>How our integrated services support the [Industry Name] sector.</p>
+            </div>
+            <div class="roof-grid">
+                <div class="roof-item">
+                    <div class="roof-icon"></div>
+                    <h3>Audit & Compliance</h3>
+                    <p>[Industry-specific application, e.g., "APRA and ACQSC compliance support"]</p>
+                    <a href="#">Learn More →</a>
+                </div>
+                <div class="roof-item">
+                    <div class="roof-icon"></div>
+                    <h3>Business Advisory</h3>
+                    <p>[Industry-specific application, e.g., "Financial modelling for facility expansion"]</p>
+                    <a href="#">Learn More →</a>
+                </div>
+                <div class="roof-item">
+                    <div class="roof-icon"></div>
+                    <h3>Taxation</h3>
+                    <p>[Industry-specific application, e.g., "Not-for-profit tax concessions and GST advice"]</p>
+                    <a href="#">Learn More →</a>
+                </div>
+                <div class="roof-item">
+                    <div class="roof-icon"></div>
+                    <h3>Lending</h3>
+                    <p>[Industry-specific application, e.g., "Equipment finance for medical technology"]</p>
+                    <a href="#">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">CROSS-SELLING GRID</div>
+        <strong>Purpose:</strong> Connect the industry page back to the core services, demonstrating the "Full Stack" capability.<br>
+        <strong>Content:</strong> The descriptions here must be tailored to the industry, not generic service descriptions.
+    </div>
+
+    <section class="case-study">
+        <div class="cs-container">
+            <div class="cs-quote">
+                "Kidmans Partners understands the nuances of our sector better than anyone else we've worked with. Their integrated approach has streamlined our operations and ensured we remain fully compliant."
+            </div>
+            <div class="cs-author">Client Name</div>
+            <div class="cs-company">Director, [Industry] Company</div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">SOCIAL PROOF</div>
+        <strong>Requirement:</strong> Every industry page must have at least one highly relevant testimonial or case study from that specific sector.
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Audit Payments Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #F5F5F5; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Page Header */
+        .page-header { background: #003D7A; color: white; padding: 40px; text-align: center; }
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 8px; }
+        .back-link { color: #D4A574; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }
+
+        /* Payment Form */
+        .payment-section { padding: 60px 40px; }
+        .payment-container { max-width: 800px; margin: 0 auto; background: white; border: 1px solid #E0E0E0; border-top: 4px solid #D4A574; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .form-group { margin-bottom: 24px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        input[type="text"], input[type="email"], input[type="number"] { width: 100%; padding: 12px; border: 1px solid #E0E0E0; border-radius: 4px; font-family: 'Inter', sans-serif; }
+        input:focus { outline: none; border-color: #D4A574; }
+        
+        .help-text { font-size: 12px; color: #666; margin-top: 4px; }
+        
+        .payment-methods { margin: 32px 0; padding: 24px; background: #F9F9F9; border: 1px solid #E0E0E0; }
+        .payment-methods h3 { font-size: 16px; margin-bottom: 16px; }
+        .method-options { display: flex; gap: 16px; }
+        .method-option { flex: 1; border: 1px solid #E0E0E0; padding: 16px; text-align: center; cursor: pointer; background: white; }
+        .method-option.active { border-color: #D4A574; background: #FFFDF8; }
+        
+        .submit-btn { width: 100%; background: #D4A574; color: white; padding: 16px; border: none; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: #C39463; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; margin-top: 60px; }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .method-options { flex-direction: column; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <div class="page-header">
+        <a href="payments-hub.html" class="back-link">← Back to Payment Options</a>
+        <h1>Pay Audit Invoice</h1>
+    </div>
+
+    <section class="payment-section">
+        <div class="payment-container">
+            <div class="annotation">
+                <div class="annotation-label">PAYMENT FORM TEMPLATE</div>
+                <strong>Integration:</strong> This form will likely integrate with a payment gateway API (e.g., Stripe, eWay, or Bpoint).<br>
+                <strong>Validation:</strong> Invoice Number and Amount must be strictly validated.<br>
+                <strong>Styling:</strong> Uses Gold accent (#D4A574) to visually confirm they are in the Audit payment flow.
+            </div>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Invoice Number *</label>
+                        <input type="text" placeholder="e.g. INV-12345" required>
+                        <div class="help-text">Found in the top right corner of your invoice</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Amount (AUD) *</label>
+                        <input type="number" placeholder="0.00" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Client / Entity Name *</label>
+                    <input type="text" placeholder="Name exactly as it appears on invoice" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Contact Name *</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" placeholder="For payment receipt" required>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Select Payment Method</h3>
+                    <div class="method-options">
+                        <div class="method-option active">
+                            <strong>Credit Card</strong>
+                            <div class="help-text">Visa, Mastercard, AMEX</div>
+                        </div>
+                        <div class="method-option">
+                            <strong>Direct Debit</strong>
+                            <div class="help-text">Bank Account</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn">Proceed to Secure Payment</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Careers Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 100px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 20px; max-width: 800px; margin: 0 auto 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+
+        /* Culture Section */
+        .culture { padding: 80px 40px; background: #F5F5F5; }
+        .culture-container { max-width: 1200px; margin: 0 auto; }
+        .culture h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; color: #003D7A; }
+        .culture-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .culture-card { background: white; padding: 32px; border: 1px solid #E0E0E0; }
+        .culture-icon { width: 48px; height: 48px; background: #00A0B0; margin-bottom: 24px; }
+        .culture-card h3 { font-size: 20px; margin-bottom: 12px; color: #2E2E2E; }
+
+        /* Open Roles Section */
+        .roles { padding: 80px 40px; }
+        .roles-container { max-width: 1000px; margin: 0 auto; }
+        .roles h2 { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 40px; color: #003D7A; }
+        
+        .role-list { display: flex; flex-direction: column; gap: 16px; }
+        .role-item { border: 1px solid #E0E0E0; padding: 24px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+        .role-item:hover { border-color: #00A0B0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .role-info h3 { font-size: 20px; color: #003D7A; margin-bottom: 8px; }
+        .role-meta { display: flex; gap: 16px; font-size: 14px; color: #666; }
+        .role-meta span { display: flex; align-items: center; gap: 6px; }
+        .role-btn { padding: 10px 20px; background: white; border: 1px solid #00A0B0; color: #00A0B0; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .role-item:hover .role-btn { background: #00A0B0; color: white; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .culture-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .culture-grid { grid-template-columns: 1fr; }
+            .role-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Build Your Career With Us</h1>
+        <p>Join a multi-disciplinary team where your expertise is valued, your growth is supported, and your work makes a real impact.</p>
+        <a href="#roles" class="btn">View Open Roles</a>
+    </section>
+
+    <section class="culture">
+        <div class="culture-container">
+            <h2>Why Kidmans Partners?</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon"></div>
+                    <h3>Professional Growth</h3>
+                    <p>We invest heavily in ongoing training, CA/CPA support, and clear pathways for career progression within the firm.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"></div>
+                    <h3>Multi-Disciplinary Exposure</h3>
+                    <p>Work alongside experts in wealth management, lending, and advisory, broadening your commercial acumen.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"></div>
+                    <h3>Work-Life Balance</h3>
+                    <p>We offer flexible working arrangements and a supportive suburban office environment without the CBD commute.</p>
+                </div>
+            </div>
+        </div>
+        <div class="annotation">
+            <div class="annotation-label">CULTURE SECTION</div>
+            <strong>Purpose:</strong> Sell the firm to prospective employees. Highlight the benefits of a suburban firm with CBD-level work.
+        </div>
+    </section>
+
+    <section id="roles" class="roles">
+        <div class="roles-container">
+            <h2>Current Opportunities</h2>
+            
+            <div class="annotation">
+                <div class="annotation-label">JOB LISTINGS</div>
+                <strong>Integration:</strong> This could be powered by a Custom Post Type (CPT) or integrated with an ATS (Applicant Tracking System) via API.
+            </div>
+
+            <div class="role-list">
+                <div class="role-item">
+                    <div class="role-info">
+                        <h3>Senior Accountant - Business Advisory</h3>
+                        <div class="role-meta">
+                            <span>📍 Balwyn, VIC</span>
+                            <span>⏱️ Full-Time</span>
+                            <span>💼 Accounting</span>
+                        </div>
+                    </div>
+                    <a href="#" class="role-btn">View Details</a>
+                </div>
+
+                <div class="role-item">
+                    <div class="role-info">
+                        <h3>Intermediate Auditor</h3>
+                        <div class="role-meta">
+                            <span>📍 Balwyn, VIC</span>
+                            <span>⏱️ Full-Time</span>
+                            <span>💼 Audit & Assurance</span>
+                        </div>
+                    </div>
+                    <a href="#" class="role-btn">View Details</a>
+                </div>
+
+                <div class="role-item">
+                    <div class="role-info">
+                        <h3>Client Services Coordinator</h3>
+                        <div class="role-meta">
+                            <span>📍 Balwyn, VIC</span>
+                            <span>⏱️ Full-Time</span>
+                            <span>💼 Administration</span>
+                        </div>
+                    </div>
+                    <a href="#" class="role-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

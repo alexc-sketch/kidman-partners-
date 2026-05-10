@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Homepage Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2E2E2E;
+            background-color: #FFFFFF;
+        }
+
+        .annotation-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #00A0B0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .annotation-toggle:hover {
+            background: #008A99;
+        }
+
+        .annotation {
+            display: none;
+            background: #FFF3CD;
+            border-left: 4px solid #D4A574;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 12px;
+            color: #333;
+            border-radius: 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .annotation.show {
+            display: block;
+        }
+
+        .annotation-label {
+            font-weight: 700;
+            color: #D4A574;
+            margin-bottom: 4px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #2E2E2E;
+            color: white;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav .cta-button {
+            background: #00A0B0;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -100px;
+            bottom: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero .subheading {
+            font-size: 18px;
+            margin-bottom: 32px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero .cta-button {
+            background: #D4A574;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 32px;
+            display: inline-block;
+        }
+
+        .hero .social-proof {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .hero .social-proof-text {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .hero .logos {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero .logo-placeholder {
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 40px;
+            border-radius: 0;
+        }
+
+        /* Problem-Solution Section */
+        .problem-solution {
+            padding: 60px 40px;
+            background: #F5F5F5;
+        }
+
+        .problem-solution-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .problem-solution h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #D4A574;
+            margin-bottom: 24px;
+        }
+
+        .problem-solution p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .problem-solution .visual-placeholder {
+            background: #E0E0E0;
+            height: 300px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /* Services Grid */
+        .services-section {
+            padding: 60px 40px;
+            background: #FFFFFF;
+        }
+
+        .services-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #D4A574;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .services-section .intro-text {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            border-radius: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+        .service-card .icon {
+            width: 36px;
+            height: 36px;
+            background: #00A0B0;
+            margin-bottom: 12px;
+            border-radius: 0;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .service-card a {
+            color: #00A0B0;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 60px 40px;
+            background: #F5F5F5;
+        }
+
+        .testimonials-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #D4A574;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: #FFFFFF;
+            padding: 24px;
+            border-radius: 0;
+            border: 1px solid #E0E0E0;
+        }
+
+        .testimonial-card .stars {
+            color: #D4A574;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .testimonial-card .quote {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .testimonial-card .attribution {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-card .company {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .cta-button {
+            background: #D4A574;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 40px;
+            background: #FFFFFF;
+            text-align: center;
+        }
+
+        .newsletter-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .newsletter-section p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 0;
+            font-size: 14px;
+        }
+
+        .newsletter-form button {
+            background: #00A0B0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #2E2E2E;
+            color: white;
+            padding: 40px;
+        }
+
+        footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        footer h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        footer .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-solution-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            nav {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            footer .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .problem-solution {
+                padding: 40px 20px;
+            }
+
+            .services-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+            <li><a href="#">Payments</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">News</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <div class="annotation annotation-label">NAVIGATION: Global header with logo, main navigation, and primary CTA button. Fixed position, dark charcoal background (#2E2E2E). Responsive: hamburger menu on mobile.</div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>One Master Plan. Fewer Gaps.</h1>
+            <p class="subheading">Integrated wealth strategy connecting all your financial services. We ensure you have clarity, confidence, and control.</p>
+            <button class="cta-button">Book Your Free Consultation</button>
+            
+            <div class="social-proof">
+                <span class="social-proof-text">Trusted by leading organizations:</span>
+                <div class="logos">
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                    <div class="logo-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">HERO SECTION</div>
+        <strong>Purpose:</strong> Communicate primary value proposition and capture user attention<br>
+        <strong>Copy:</strong> "One Master Plan. Fewer Gaps." (headline) + supporting subheading<br>
+        <strong>Design:</strong> Blue gradient background (#003D7A to #0099D8), white text, large Playfair Display headline (48px)<br>
+        <strong>CTA:</strong> Gold button (#D4A574) "Book Your Free Consultation" - primary conversion goal<br>
+        <strong>Social Proof:</strong> Client logos showing trusted organizations<br>
+        <strong>Animation:</strong> Fade-in on page load (0.8s ease-out)<br>
+        <strong>Mobile:</strong> Stack vertically, reduce headline to 32px, center align
+    </div>
+
+    <!-- Problem-Solution Section -->
+    <section class="problem-solution">
+        <div class="problem-solution-content">
+            <div>
+                <h2>The Challenge</h2>
+                <p>Managing multiple advisors is complex and time-consuming. Financial services are fragmented, leaving gaps in your overall strategy. You're left wondering if you're making the best decisions.</p>
+                <p>Without integrated planning, you risk missing opportunities, duplicating efforts, and paying more than necessary.</p>
+            </div>
+            <div>
+                <h2>Our Solution</h2>
+                <p>We bring all your financial services under one roof. Our integrated approach connects accounting, tax, wealth management, and business advisory into a single master plan.</p>
+                <p>You get clarity on your total financial picture, confidence in your strategy, and control over your future. One team. One plan. Better outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">PROBLEM-SOLUTION SECTION</div>
+        <strong>Purpose:</strong> Establish context and demonstrate understanding of user pain points<br>
+        <strong>Layout:</strong> 2-column grid (desktop), stacked (mobile)<br>
+        <strong>Background:</strong> Off-white (#F5F5F5)<br>
+        <strong>Typography:</strong> Playfair Display headings (36px, gold #D4A574), Inter body (16px)<br>
+        <strong>Content:</strong> Left column = problem narrative, Right column = solution narrative<br>
+        <strong>Spacing:</strong> 60px padding, 60px gap between columns<br>
+        <strong>Mobile:</strong> Stack vertically, reduce padding to 40px
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h2>Our Integrated Services</h2>
+        <p class="intro-text">We partner with ambitious SMEs and high-net-worth families to offer a complete suite of services under one roof.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="annotation">
+                    <div class="annotation-label">SERVICE CARD</div>
+                    Background: White, Border: 1px #E0E0E0, Padding: 24px<br>
+                    Hover: Scale 1.02, shadow 0 4px 12px rgba(0,0,0,0.15)<br>
+                    Icon: 36x36px, #00A0B0<br>
+                    Title: Playfair Display 18px, bold<br>
+                    Description: Inter 14px, line-height 1.6<br>
+                    CTA: "Learn More" link in teal
+                </div>
+                <div class="icon"></div>
+                <h3>Audit, Compliance & Assurance</h3>
+                <p>Rigorous audits and assurance services designed to ensure accuracy and strategic value.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Bookkeeping</h3>
+                <p>Optimize your operations with accurate, cloud-based bookkeeping and reporting.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Business Advisory & Mentoring</h3>
+                <p>Strategic planning and mentoring to guide you through growth and succession.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Lending</h3>
+                <p>Tailored commercial and residential lending solutions for growth and investment.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>SMSF</h3>
+                <p>End-to-end self-managed super fund management and compliance support.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Taxation & Business Services</h3>
+                <p>Proactive tax planning for businesses, individuals, and comprehensive compliance.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="icon"></div>
+                <h3>Wealth Management</h3>
+                <p>Holistic personal and financial planning to protect and grow your wealth.</p>
+                <a href="#">Learn More →</a>
+            </div>
+
+            <div class="service-card" style="background: #00A0B0; color: white; border: none;">
+                <div class="icon" style="background: white;"></div>
+                <h3 style="color: white;">Book a Discovery Call</h3>
+                <p style="color: rgba(255,255,255,0.9);">Ready to explore how our integrated approach can transform your financial strategy?</p>
+                <a href="#" style="color: #D4A574;">Schedule Now →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">SERVICES GRID SECTION</div>
+        <strong>Purpose:</strong> Showcase all 8 core services and enable cross-service discovery<br>
+        <strong>Layout:</strong> 4-column grid (desktop), 2-column (tablet), 1-column (mobile)<br>
+        <strong>Grid Gap:</strong> 24px<br>
+        <strong>Card Count:</strong> 8 service cards + 1 CTA card (total 9 cards)<br>
+        <strong>Last Card:</strong> Teal background (#00A0B0) with white text - secondary CTA<br>
+        <strong>Animation:</strong> Cards fade-in on scroll with 150ms stagger<br>
+        <strong>Mobile:</strong> Single column, full-width cards
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2>What Our Clients Say</h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★ (5/5)</div>
+                <p class="quote">"Kidmans Partners transformed our financial planning. Having one integrated team has saved us countless hours and given us real confidence in our strategy."</p>
+                <div class="attribution">Sarah Mitchell</div>
+                <div class="company">Director, Tech Startup</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★ (5/5)</div>
+                <p class="quote">"Their 13-step process gave us complete transparency. We understood exactly where we stood and where we were heading. Highly recommended."</p>
+                <div class="attribution">James Chen</div>
+                <div class="company">Business Owner, Manufacturing</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★ (5/5)</div>
+                <p class="quote">"The level of expertise across their team is exceptional. They don't just manage our finances—they partner with us for growth."</p>
+                <div class="attribution">Emma Thompson</div>
+                <div class="company">Managing Director, Professional Services</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">TESTIMONIALS SECTION</div>
+        <strong>Purpose:</strong> Build trust through social proof and client success stories<br>
+        <strong>Layout:</strong> 3-column grid (desktop), 2-column (tablet), 1-column (mobile)<br>
+        <strong>Background:</strong> Off-white (#F5F5F5)<br>
+        <strong>Card Design:</strong> White background, 1px border #E0E0E0, 24px padding<br>
+        <strong>Star Rating:</strong> Gold color (#D4A574)<br>
+        <strong>Quote:</strong> Inter 14px, italic, line-height 1.6<br>
+        <strong>Attribution:</strong> Bold name, light gray company<br>
+        <strong>Placement:</strong> Before final CTA to maximize conversion impact
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Achieve More, Together?</h2>
+        <p>Schedule a free consultation with one of our advisors. We'll discuss your specific situation and show you how our integrated approach can transform your financial strategy.</p>
+        <button class="cta-button">Book Your Discovery Call Today</button>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">CTA SECTION</div>
+        <strong>Purpose:</strong> Final conversion opportunity before footer<br>
+        <strong>Background:</strong> Blue gradient (#003D7A to #0099D8)<br>
+        <strong>Text:</strong> White, centered<br>
+        <strong>Headline:</strong> Playfair Display 36px<br>
+        <strong>Body:</strong> Inter 16px, max-width 600px<br>
+        <strong>Button:</strong> Gold (#D4A574), 12px 24px padding<br>
+        <strong>Spacing:</strong> 60px padding top/bottom<br>
+        <strong>Conversion Goal:</strong> 10-15% of homepage visitors
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h3>Subscribe To Our Newsletter</h3>
+        <p>Stay up to date with the latest news and insights for your financial journey.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Your Email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <div class="annotation">
+        <div class="annotation-label">NEWSLETTER SECTION</div>
+        <strong>Purpose:</strong> Email list capture for ongoing engagement<br>
+        <strong>Background:</strong> White<br>
+        <strong>Form Layout:</strong> Horizontal (desktop), vertical (mobile)<br>
+        <strong>Input:</strong> 1px border #E0E0E0, 10px 12px padding, Inter 14px<br>
+        <strong>Button:</strong> Teal (#00A0B0), white text, bold<br>
+        <strong>Max-width:</strong> 500px form container<br>
+        <strong>Spacing:</strong> 40px padding section
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">Call 03 9836 2900</a></li>
+                    <li><a href="#">Email</a></li>
+                    <li><a href="#">Suite 3, 156 Williamstown Road</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="#">Audit, Compliance & Assurance</a></li>
+                    <li><a href="#">Bookkeeping</a></li>
+                    <li><a href="#">Business Advisory & Mentoring</a></li>
+                    <li><a href="#">Lending</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Our Clientele</h4>
+                <ul>
+                    <li><a href="#">Aged Care</a></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Health</a></li>
+                    <li><a href="#">Manufacturing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Payments</h4>
+                <ul>
+                    <li><a href="#">Accounting Payments</a></li>
+                    <li><a href="#">Audit Payments</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Kidmans Partners. All rights reserved. | <a href="#" style="color: #999;">Privacy Policy</a> | <a href="#" style="color: #999;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <div class="annotation">
+        <div class="annotation-label">FOOTER</div>
+        <strong>Background:</strong> Dark charcoal (#2E2E2E)<br>
+        <strong>Layout:</strong> 4-column grid (desktop), 1-column (mobile)<br>
+        <strong>Text Color:</strong> White (#FFFFFF), links light gray (#ccc)<br>
+        <strong>Heading:</strong> Inter 14px bold<br>
+        <strong>Links:</strong> Inter 12px, line-height 1.8<br>
+        <strong>Bottom Section:</strong> Border-top 1px #444, centered text<br>
+        <strong>Spacing:</strong> 40px padding, 40px gap between columns
+    </div>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            
+            annotations.forEach(ann => {
+                ann.classList.toggle('show');
+            });
+            
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - About Us Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 100px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 20px; max-width: 800px; margin: 0 auto; }
+
+        /* Story Section */
+        .story { padding: 80px 40px; }
+        .story-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .story-image { height: 500px; background: #E0E0E0; display: flex; align-items: center; justify-content: center; color: #999; }
+        .story-content h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; margin-bottom: 24px; }
+        .story-content p { margin-bottom: 16px; font-size: 16px; }
+
+        /* Values Section */
+        .values { padding: 80px 40px; background: #F5F5F5; }
+        .values-container { max-width: 1200px; margin: 0 auto; }
+        .values h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; color: #003D7A; }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .value-card { background: white; padding: 40px; border-top: 4px solid #D4A574; text-align: center; }
+        .value-icon { width: 64px; height: 64px; background: #F5F5F5; border-radius: 50%; margin: 0 auto 24px; }
+        .value-card h3 { font-size: 20px; margin-bottom: 16px; color: #2E2E2E; }
+
+        /* Stats Section */
+        .stats { padding: 60px 40px; background: #003D7A; color: white; }
+        .stats-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; text-align: center; }
+        .stat-item h3 { font-family: 'Playfair Display', serif; font-size: 48px; color: #D4A574; margin-bottom: 8px; }
+        .stat-item p { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .story-container { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .values-grid { grid-template-columns: 1fr; }
+            .stats-container { flex-direction: column; gap: 40px; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>CBD-Level Expertise. Suburban Care.</h1>
+        <p>We are a multi-disciplinary financial services firm dedicated to providing integrated, strategic advice to ambitious SMEs and high-net-worth families.</p>
+    </section>
+
+    <section class="story">
+        <div class="story-container">
+            <div class="story-content">
+                <h2>Our Story</h2>
+                <p>Founded with a vision to break down the silos in traditional financial services, Kidmans Partners has grown into a comprehensive advisory firm.</p>
+                <p>We recognized early on that business owners and families were frustrated by having to coordinate between separate accountants, wealth managers, and brokers. Information was lost, strategies conflicted, and opportunities were missed.</p>
+                <p>By bringing these disciplines under one roof, we created a model where your entire financial ecosystem works in harmony. One master plan, executed by a unified team of specialists.</p>
+            </div>
+            <div class="story-image">
+                [Team / Office Image]
+            </div>
+        </div>
+        <div class="annotation">
+            <div class="annotation-label">STORY SECTION</div>
+            <strong>Narrative:</strong> Focuses on the "Why" - explaining the origin of the integrated service model.<br>
+            <strong>Image:</strong> Should feature the actual team or office to build authenticity and trust.
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>20+</h3>
+                <p>Years Experience</p>
+            </div>
+            <div class="stat-item">
+                <h3>8</h3>
+                <p>Core Disciplines</p>
+            </div>
+            <div class="stat-item">
+                <h3>1</h3>
+                <p>Integrated Plan</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="values">
+        <div class="values-container">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"></div>
+                    <h3>Technical Excellence</h3>
+                    <p>We maintain rigorous standards and deep technical knowledge across all our disciplines to deliver superior outcomes.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"></div>
+                    <h3>Proactive Partnership</h3>
+                    <p>We don't just report on the past; we actively shape your future with forward-looking advice and strategy.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"></div>
+                    <h3>Absolute Clarity</h3>
+                    <p>We translate complex financial concepts into clear, actionable insights that empower you to make confident decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

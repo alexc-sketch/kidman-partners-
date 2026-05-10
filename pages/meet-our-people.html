@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Meet Our People Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 100px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 20px; max-width: 800px; margin: 0 auto; }
+
+        /* Team Section */
+        .team { padding: 80px 40px; }
+        .team-container { max-width: 1200px; margin: 0 auto; }
+        
+        /* Filters */
+        .filters { display: flex; justify-content: center; gap: 16px; margin-bottom: 60px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 24px; background: white; border: 1px solid #E0E0E0; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .filter-btn.active { background: #003D7A; color: white; border-color: #003D7A; }
+        .filter-btn:hover:not(.active) { border-color: #003D7A; }
+
+        /* Team Grid */
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        
+        .team-card { background: white; border: 1px solid #E0E0E0; transition: all 0.3s; cursor: pointer; }
+        .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #D4A574; }
+        
+        .member-photo { height: 280px; background: #F5F5F5; display: flex; align-items: center; justify-content: center; color: #999; }
+        .member-info { padding: 24px; text-align: center; }
+        .member-info h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #003D7A; margin-bottom: 4px; }
+        .member-info .role { font-size: 14px; color: #D4A574; font-weight: 600; margin-bottom: 12px; }
+        .member-info .department { font-size: 13px; color: #666; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; margin-top: 60px; }
+
+        /* Responsive */
+        @media (max-width: 1200px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 992px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .team-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Meet Our People</h1>
+        <p>A multi-disciplinary team of specialists working together to deliver integrated financial solutions.</p>
+    </section>
+
+    <section class="team">
+        <div class="team-container">
+            <div class="annotation">
+                <div class="annotation-label">TEAM DIRECTORY</div>
+                <strong>Functionality:</strong> Isotope or similar JS library for filtering without page reload.<br>
+                <strong>Data Structure:</strong> Powered by a 'Team Members' Custom Post Type (CPT) in WordPress.<br>
+                <strong>Interaction:</strong> Clicking a card opens a modal or links to a full bio page.
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Directors</button>
+                <button class="filter-btn">Accounting & Tax</button>
+                <button class="filter-btn">Wealth Management</button>
+                <button class="filter-btn">Audit</button>
+                <button class="filter-btn">Lending</button>
+            </div>
+
+            <div class="team-grid">
+                <!-- Member 1 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>John Smith</h3>
+                        <div class="role">Managing Director</div>
+                        <div class="department">Accounting & Advisory</div>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>Sarah Johnson</h3>
+                        <div class="role">Director</div>
+                        <div class="department">Wealth Management</div>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>Michael Chen</h3>
+                        <div class="role">Director</div>
+                        <div class="department">Audit & Assurance</div>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>Emma Williams</h3>
+                        <div class="role">Senior Advisor</div>
+                        <div class="department">Business Advisory</div>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>David Brown</h3>
+                        <div class="role">Mortgage Broker</div>
+                        <div class="department">Finance & Lending</div>
+                    </div>
+                </div>
+
+                <!-- Member 6 -->
+                <div class="team-card">
+                    <div class="member-photo">Photo Placeholder</div>
+                    <div class="member-info">
+                        <h3>Lisa Taylor</h3>
+                        <div class="role">Senior Accountant</div>
+                        <div class="department">Taxation Services</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

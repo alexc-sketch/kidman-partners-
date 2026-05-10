@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Finance & Lending Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: 0 auto 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+
+        /* Split Layout Section */
+        .split-services { display: flex; min-height: 600px; }
+        .split-half { flex: 1; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+        .split-half.business { background: #F5F5F5; border-right: 1px solid #E0E0E0; }
+        .split-half.residential { background: #FFFFFF; }
+        .split-half h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; margin-bottom: 24px; }
+        .split-half p { font-size: 16px; margin-bottom: 32px; }
+        .split-half ul { list-style: none; margin-bottom: 40px; }
+        .split-half li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 16px; }
+        .split-half li::before { content: '→'; color: #00A0B0; font-weight: bold; }
+        .split-half .btn { align-self: flex-start; padding: 12px 24px; border: 2px solid #00A0B0; color: #00A0B0; text-decoration: none; font-weight: 700; transition: all 0.2s; }
+        .split-half .btn:hover { background: #00A0B0; color: white; }
+
+        /* Why Choose Us */
+        .why-choose { padding: 80px 40px; background: #003D7A; color: white; }
+        .why-container { max-width: 1200px; margin: 0 auto; }
+        .why-choose h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .why-item { text-align: center; }
+        .why-icon { width: 64px; height: 64px; background: rgba(255,255,255,0.1); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+        .why-item h3 { font-size: 20px; margin-bottom: 12px; color: #D4A574; }
+        .why-item p { font-size: 14px; opacity: 0.9; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .split-services { flex-direction: column; }
+            .split-half.business { border-right: none; border-bottom: 1px solid #E0E0E0; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .why-grid { grid-template-columns: 1fr; }
+            .split-half { padding: 60px 20px; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Finance & Lending</h1>
+        <p>We remove the friction. By providing a clear loan comparison and transparent finance options, we deliver a smoother process that secures the right lending structure for your specific needs.</p>
+        <a href="#" class="btn">Speak to a Broker</a>
+    </section>
+
+    <section class="split-services">
+        <div class="split-half business">
+            <h2>Business & Commercial Lending</h2>
+            <p>Tailored business lending solutions for operational growth, equipment finance, commercial property and working capital requirements.</p>
+            <ul>
+                <li>Commercial Property Finance</li>
+                <li>Equipment & Asset Finance</li>
+                <li>Working Capital Solutions</li>
+                <li>Business Acquisition Funding</li>
+            </ul>
+            <a href="#" class="btn">Explore Business Lending</a>
+        </div>
+        <div class="split-half residential">
+            <h2>Residential & Investment Mortgages</h2>
+            <p>Professional mortgage broking for residential homes and investment properties, including refinancing and pre-approvals.</p>
+            <ul>
+                <li>Home Loans & Pre-approvals</li>
+                <li>Investment Property Finance</li>
+                <li>Refinancing & Rate Reviews</li>
+                <li>Construction Loans</li>
+            </ul>
+            <a href="#" class="btn">Explore Residential Lending</a>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">SPLIT LAYOUT DESIGN</div>
+        <strong>Purpose:</strong> Clearly divide the two distinct target audiences (B2B vs B2C)<br>
+        <strong>Layout:</strong> 50/50 split on desktop, stacked vertically on mobile<br>
+        <strong>Visuals:</strong> Contrasting background colors (Off-white vs White) to separate the offerings
+    </div>
+
+    <section class="why-choose">
+        <div class="why-container">
+            <h2>Why Choose Kidmans Partners Mortgage Broking?</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-icon"></div>
+                    <h3>Real Choice</h3>
+                    <p>Access to a wide panel of multiple lenders to find the right fit.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon"></div>
+                    <h3>Competitive Rates</h3>
+                    <p>Expert negotiation to secure better outcomes and lower rates.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon"></div>
+                    <h3>Less Paperwork</h3>
+                    <p>We handle all legwork from application to settlement.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon"></div>
+                    <h3>Convenient Support</h3>
+                    <p>Support provided on your terms and schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

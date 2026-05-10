@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Wireframe Master Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2E2E2E;
+            background-color: #F5F5F5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        header {
+            border-bottom: 2px solid #E0E0E0;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #003D7A;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .status-legend {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-complete { background: #4CAF50; }
+        .status-progress { background: #FFC107; }
+        .status-complete { background: #E0E0E0; }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00A0B0;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .page-list {
+            list-style: none;
+        }
+
+        .page-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .page-item:hover {
+            background: #F9F9F9;
+            border-color: #00A0B0;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .page-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #2E2E2E;
+            text-decoration: none;
+        }
+
+        .page-name:hover {
+            color: #00A0B0;
+        }
+
+        .page-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn-view {
+            background: #00A0B0;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-view:hover {
+            background: #008A99;
+        }
+
+        .btn-disabled {
+            background: #E0E0E0;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            background: #E0E0E0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Kidmans Partners</h1>
+                <div class="subtitle">Wireframe Master Index</div>
+            </div>
+            <div class="status-legend">
+                <div class="status-item"><div class="status-icon status-complete"></div> Complete</div>
+                <div class="status-item"><div class="status-icon status-progress"></div> In Progress</div>
+                <div class="status-item"><div class="status-icon status-complete"></div> Pending</div>
+            </div>
+        </header>
+
+        <h2 class="section-title">Priority 1: Enhanced Core Pages</h2>
+        <ul class="page-list">
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/homepage.html" class="page-name">Homepage</a>
+                        <div class="page-desc">Updated copy, value proposition, social proof, CTAs</div>
+                    </div>
+                </div>
+                <a href="pages/homepage.html" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/service-hub.html" class="page-name">Service Hub</a>
+                        <div class="page-desc">Enhanced 8-service grid, mobile-first layout</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/industries-hub.html" class="page-name">Industries Hub</a>
+                        <div class="page-desc">Enhanced 9-industry grid, mobile-first layout</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/master-service.html" class="page-name">Master Service Template</a>
+                        <div class="page-desc">Improved problem-solution narrative, mobile-first</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/business-advisory.html" class="page-name">Business Advisory & Mentoring</a>
+                        <div class="page-desc">Lifecycle tabs (Start-ups, Established, Exit-focused)</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/finance-lending.html" class="page-name">Finance & Lending</a>
+                        <div class="page-desc">Split layout (Business/Commercial, Residential/Investment)</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/wealth-management.html" class="page-name">Wealth Management</a>
+                        <div class="page-desc">Interactive advice process carousel</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/master-industry.html" class="page-name">Master Industry Template</a>
+                        <div class="page-desc">Sector expertise, "All Your Needs Under One Roof"</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+        </ul>
+
+        <h2 class="section-title">Priority 2: New Pages</h2>
+        <ul class="page-list">
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/payments-hub.html" class="page-name">Payments Hub</a>
+                        <div class="page-desc">Payment options directory</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/audit-payments.html" class="page-name">Audit Payments</a>
+                        <div class="page-desc">Template for audit payment processing</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/about.html" class="page-name">About</a>
+                        <div class="page-desc">Company history, values, mission, team overview</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/memberships.html" class="page-name">Our Memberships</a>
+                        <div class="page-desc">Membership tier comparison</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/careers.html" class="page-name">Careers</a>
+                        <div class="page-desc">Job listings, culture, application</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+            <li class="page-item">
+                <div class="page-info">
+                    <div class="status-icon status-complete"></div>
+                    <div>
+                        <a href="pages/meet-our-people.html" class="page-name">Meet Our People</a>
+                        <div class="page-desc">Team directory with profiles</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-view">View Wireframe</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

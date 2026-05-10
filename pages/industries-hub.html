@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Industries Hub Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: 0 auto 32px; }
+
+        /* Industries Grid */
+        .industries-section { padding: 60px 40px; background: #F5F5F5; }
+        .industries-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .industry-card { background: #FFFFFF; border: 1px solid #E0E0E0; transition: all 0.3s; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+        .industry-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-4px); border-color: #00A0B0; }
+        .industry-card .image-placeholder { height: 200px; background: #E0E0E0; display: flex; align-items: center; justify-content: center; color: #999; }
+        .industry-card .content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .industry-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: #003D7A; margin-bottom: 16px; }
+        .industry-card .features { list-style: none; margin-bottom: 24px; flex-grow: 1; }
+        .industry-card .features li { font-size: 14px; color: #444; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
+        .industry-card .features li::before { content: '•'; color: #D4A574; font-weight: bold; }
+        .industry-card .btn { display: inline-block; padding: 10px 20px; border: 1px solid #00A0B0; color: #00A0B0; text-decoration: none; font-weight: 600; text-align: center; transition: all 0.2s; }
+        .industry-card .btn:hover { background: #00A0B0; color: white; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { .industries-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            .industries-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Sector Specific Financial Intelligence</h1>
+        <p>We deliver CBD level technical expertise tailored to the unique regulatory and commercial landscapes of your industry.</p>
+        <div class="annotation">
+            <div class="annotation-label">HERO SECTION</div>
+            <strong>Design:</strong> Blue gradient background, centered text<br>
+            <strong>Typography:</strong> Playfair Display 48px (desktop), 36px (mobile)<br>
+            <strong>Copy:</strong> Emphasizes "CBD level technical expertise"
+        </div>
+    </section>
+
+    <section class="industries-section">
+        <div class="industries-grid">
+            <!-- Industry 1 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Aged Care Image</div>
+                <div class="content">
+                    <h3>Aged Care</h3>
+                    <ul class="features">
+                        <li>Aged care audit and compliance support</li>
+                        <li>Specialised business advisory</li>
+                        <li>Cash flow forecasting and means assessment</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 2 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Education Image</div>
+                <div class="content">
+                    <h3>Education</h3>
+                    <ul class="features">
+                        <li>ASQA financial viability assessments (FVRA)</li>
+                        <li>CRICOS registration and ESOS compliance</li>
+                        <li>RTO financial modelling and audit support</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 3 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Health Image</div>
+                <div class="content">
+                    <h3>Health</h3>
+                    <ul class="features">
+                        <li>Medical practice structuring and tax planning</li>
+                        <li>Contractor doctor payroll tax risk management</li>
+                        <li>SMSF strategies for healthcare professionals</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 4 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Manufacturing Image</div>
+                <div class="content">
+                    <h3>Manufacturing</h3>
+                    <ul class="features">
+                        <li>R&D tax incentive and offset eligibility</li>
+                        <li>Inventory accounting and COGS analysis</li>
+                        <li>Equipment finance for machinery and growth</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 5 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Not-For-Profits Image</div>
+                <div class="content">
+                    <h3>Not-For-Profits</h3>
+                    <ul class="features">
+                        <li>ACNC governance and financial reporting</li>
+                        <li>Rigorous grant acquittal audits</li>
+                        <li>Board reporting and funding compliance</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 6 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Professional Services Image</div>
+                <div class="content">
+                    <h3>Professional Services</h3>
+                    <ul class="features">
+                        <li>Partner succession and exit planning</li>
+                        <li>Service trust structures and asset protection</li>
+                        <li>WIP accounting and profitability analysis</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 7 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Real Estate Image</div>
+                <div class="content">
+                    <h3>Real Estate & Construction</h3>
+                    <ul class="features">
+                        <li>Estate agent trust account audits</li>
+                        <li>Property development tax structuring</li>
+                        <li>Construction specific cash flow forecasting</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 8 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Retail Image</div>
+                <div class="content">
+                    <h3>Retail</h3>
+                    <ul class="features">
+                        <li>Shopify and Xero systems integration</li>
+                        <li>Retail inventory and margin reporting</li>
+                        <li>Seasonal cash flow and payroll compliance</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Industry 9 -->
+            <div class="industry-card">
+                <div class="image-placeholder">Transport Image</div>
+                <div class="content">
+                    <h3>Transport & Logistics</h3>
+                    <ul class="features">
+                        <li>Fuel tax credits and fleet utilisation</li>
+                        <li>Heavy vehicle and equipment finance</li>
+                        <li>Freight business valuation and advisory</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="annotation">
+            <div class="annotation-label">INDUSTRIES GRID</div>
+            <strong>Layout:</strong> 3-column grid (desktop), 2-column (tablet), 1-column (mobile)<br>
+            <strong>Card Design:</strong> Image top, content bottom. White background, sharp corners (0px radius)<br>
+            <strong>Enhancement:</strong> Bullet points use gold accent color. Cards are equal height with flexbox.<br>
+            <strong>Images:</strong> Should be high-quality, professional photography representing the sector
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

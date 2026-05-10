@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Wealth Management Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: 0 auto 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+
+        /* Interactive Advice Process */
+        .advice-process { padding: 80px 40px; background: #F5F5F5; overflow: hidden; }
+        .ap-container { max-width: 1200px; margin: 0 auto; }
+        .ap-header { text-align: center; margin-bottom: 60px; }
+        .ap-header h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; margin-bottom: 16px; }
+        
+        .carousel-container { position: relative; padding: 20px 0; }
+        .carousel-track { display: flex; gap: 24px; transition: transform 0.5s ease; }
+        
+        .step-card { min-width: 300px; background: white; border: 1px solid #E0E0E0; padding: 32px; position: relative; transition: all 0.3s; }
+        .step-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #D4A574; }
+        
+        .step-number { font-family: 'Playfair Display', serif; font-size: 48px; color: rgba(0,160,176,0.1); position: absolute; top: 20px; right: 20px; line-height: 1; }
+        .step-card h3 { font-size: 20px; color: #003D7A; margin-bottom: 16px; position: relative; z-index: 1; }
+        .step-card p { font-size: 14px; color: #666; position: relative; z-index: 1; }
+        
+        /* Connecting Line */
+        .connecting-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #E0E0E0; z-index: 0; }
+        
+        /* Carousel Controls */
+        .carousel-controls { display: flex; justify-content: center; gap: 16px; margin-top: 40px; }
+        .control-btn { width: 40px; height: 40px; border-radius: 50%; background: white; border: 1px solid #00A0B0; color: #00A0B0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .control-btn:hover { background: #00A0B0; color: white; }
+
+        /* Services Grid */
+        .services { padding: 80px 40px; }
+        .services-container { max-width: 1200px; margin: 0 auto; }
+        .services h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; color: #003D7A; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .service-item { padding: 32px; border: 1px solid #E0E0E0; background: #F9F9F9; }
+        .service-item h3 { font-size: 20px; margin-bottom: 16px; color: #00A0B0; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .step-card { min-width: calc(50% - 12px); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .step-card { min-width: 100%; }
+            .services-grid { grid-template-columns: 1fr; }
+            .connecting-line { display: none; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Wealth Management</h1>
+        <p>Holistic personal financial planning, retirement income strategies, and estate planning advice to protect and grow your family's wealth across generations.</p>
+        <a href="#" class="btn">Start Your Wealth Plan</a>
+    </section>
+
+    <section class="advice-process">
+        <div class="ap-container">
+            <div class="ap-header">
+                <h2>Our 13-Step Advice Process</h2>
+                <p>A structured, transparent journey to financial clarity and control.</p>
+            </div>
+            
+            <div class="carousel-container">
+                <div class="connecting-line"></div>
+                <div class="carousel-track" id="track">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <h3>Initial Meeting</h3>
+                        <p>We discuss your current situation, identify your goals, and determine if we are the right fit for your needs.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <h3>Fact Finding</h3>
+                        <p>We gather detailed information about your financial position, assets, liabilities, and risk tolerance.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <h3>Strategy Development</h3>
+                        <p>Our team analyzes your data to develop tailored strategies that align with your specific objectives.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-number">04</div>
+                        <h3>Plan Presentation</h3>
+                        <p>We present your Statement of Advice (SOA), explaining our recommendations in clear, plain English.</p>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="step-card">
+                        <div class="step-number">05</div>
+                        <h3>Implementation</h3>
+                        <p>Once approved, we handle all the paperwork and execution to put your new strategy into action.</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="control-btn" onclick="moveCarousel(-1)">←</button>
+                    <button class="control-btn" onclick="moveCarousel(1)">→</button>
+                </div>
+            </div>
+        </div>
+        <div class="annotation">
+            <div class="annotation-label">INTERACTIVE ADVICE PROCESS</div>
+            <strong>Implementation:</strong> Elementor Carousel widget or custom Swiper.js implementation<br>
+            <strong>Animation:</strong> Smooth sliding transition. Cards scale up slightly on hover.<br>
+            <strong>Visuals:</strong> Large background numbers create depth. Connecting line shows progression.<br>
+            <strong>Content:</strong> Translates the complex 13-step PDF into an easily digestible, interactive format.
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <h2>Wealth Management Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>Retirement Planning</h3>
+                    <p>Strategies to build your nest egg and ensure a comfortable, sustainable income throughout your retirement years.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Investment Strategy</h3>
+                    <p>Tailored portfolio construction based on your risk profile, timeline, and financial objectives.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Superannuation</h3>
+                    <p>Optimization of your super structure, including contribution strategies and fund selection.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Estate Planning</h3>
+                    <p>Protecting your legacy and ensuring your wealth is transferred according to your wishes in a tax-effective manner.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Risk Management</h3>
+                    <p>Personal insurance strategies (Life, TPD, Income Protection) to protect you and your family from the unexpected.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Aged Care Advice</h3>
+                    <p>Navigating the financial complexities of transitioning to aged care for yourself or a loved one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+
+        // Simple carousel logic for wireframe demonstration
+        let currentPosition = 0;
+        function moveCarousel(direction) {
+            const track = document.getElementById('track');
+            const cards = document.querySelectorAll('.step-card');
+            const cardWidth = cards[0].offsetWidth + 24; // width + gap
+            
+            // Calculate max position based on screen width
+            const visibleCards = window.innerWidth > 992 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+            const maxPosition = cards.length - visibleCards;
+            
+            currentPosition += direction;
+            
+            if (currentPosition < 0) currentPosition = 0;
+            if (currentPosition > maxPosition) currentPosition = maxPosition;
+            
+            track.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Master Service Template Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; display: flex; align-items: center; gap: 60px; }
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; margin-bottom: 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+        .hero-image { flex: 1; height: 400px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+
+        /* Problem/Solution Section */
+        .problem-solution { padding: 80px 40px; background: #F5F5F5; }
+        .ps-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .ps-box { background: white; padding: 40px; border-top: 4px solid #00A0B0; }
+        .ps-box.problem { border-color: #D4A574; }
+        .ps-box h2 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 20px; color: #003D7A; }
+
+        /* Service Details */
+        .service-details { padding: 80px 40px; }
+        .sd-container { max-width: 1200px; margin: 0 auto; }
+        .sd-header { text-align: center; margin-bottom: 60px; }
+        .sd-header h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #003D7A; }
+        .sd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .sd-item { padding: 24px; border: 1px solid #E0E0E0; }
+        .sd-item h3 { font-size: 20px; margin-bottom: 12px; color: #00A0B0; }
+
+        /* Process Section */
+        .process { padding: 80px 40px; background: #003D7A; color: white; }
+        .process-container { max-width: 1200px; margin: 0 auto; }
+        .process h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; }
+        .process-steps { display: flex; justify-content: space-between; position: relative; }
+        .process-steps::before { content: ''; position: absolute; top: 24px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.2); z-index: 1; }
+        .step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 20px; }
+        .step-number { width: 50px; height: 50px; background: #D4A574; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 20px; }
+        .step h3 { font-size: 20px; margin-bottom: 12px; }
+        .step p { font-size: 14px; opacity: 0.9; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 992px) { 
+            .hero { flex-direction: column; }
+            .ps-container { grid-template-columns: 1fr; }
+            .sd-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) { 
+            .sd-grid { grid-template-columns: 1fr; }
+            .process-steps { flex-direction: column; gap: 40px; }
+            .process-steps::before { display: none; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>[Service Name]</h1>
+            <p>[Value Proposition: A clear, benefit-driven statement about what this service achieves for the client.]</p>
+            <a href="#" class="btn">Enquire Today</a>
+        </div>
+        <div class="hero-image">
+            [Service Context Image]
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">HERO SECTION (TEMPLATE)</div>
+        <strong>Dynamic Content:</strong> Title, Value Prop, Image are pulled from ACF fields<br>
+        <strong>Layout:</strong> 50/50 split on desktop, stacked on mobile<br>
+        <strong>CTA:</strong> Primary conversion goal for this specific service
+    </div>
+
+    <section class="problem-solution">
+        <div class="ps-container">
+            <div class="ps-box problem">
+                <h2>The Challenge</h2>
+                <p>[Describe the pain points, frustrations, or complexities the client is facing before using this service. Show empathy and understanding of their situation.]</p>
+            </div>
+            <div class="ps-box solution">
+                <h2>Our Approach</h2>
+                <p>[Explain how Kidmans Partners solves this problem. Highlight the "CBD-level expertise" and personalized approach. Focus on the outcomes delivered.]</p>
+            </div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">PROBLEM/SOLUTION NARRATIVE</div>
+        <strong>Purpose:</strong> Build trust by showing we understand their pain before pitching our solution<br>
+        <strong>Design:</strong> Side-by-side comparison boxes. Problem uses Gold accent, Solution uses Teal accent.
+    </div>
+
+    <section class="service-details">
+        <div class="sd-container">
+            <div class="sd-header">
+                <h2>What is Included</h2>
+                <p>Comprehensive support tailored to your specific needs.</p>
+            </div>
+            <div class="sd-grid">
+                <div class="sd-item">
+                    <h3>[Feature 1]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+                <div class="sd-item">
+                    <h3>[Feature 2]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+                <div class="sd-item">
+                    <h3>[Feature 3]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+                <div class="sd-item">
+                    <h3>[Feature 4]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+                <div class="sd-item">
+                    <h3>[Feature 5]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+                <div class="sd-item">
+                    <h3>[Feature 6]</h3>
+                    <p>[Description of feature and its specific benefit to the client.]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">SERVICE FEATURES GRID</div>
+        <strong>Dynamic Content:</strong> Repeater field in ACF allows 3-9 features per service<br>
+        <strong>Layout:</strong> 3-column grid (desktop), 2-column (tablet), 1-column (mobile)
+    </div>
+
+    <section class="process">
+        <div class="process-container">
+            <h2>Our Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Understand</h3>
+                    <p>Deep dive into your current situation and goals.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Strategise</h3>
+                    <p>Develop a tailored plan leveraging our expertise.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Implement</h3>
+                    <p>Execute the strategy with precision and care.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Review</h3>
+                    <p>Ongoing monitoring and proactive adjustments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="annotation">
+        <div class="annotation-label">PROCESS TIMELINE</div>
+        <strong>Design:</strong> Horizontal timeline on desktop, vertical stack on mobile<br>
+        <strong>Purpose:</strong> Demystify the engagement process and set expectations
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+    </script>
+</body>
+</html>

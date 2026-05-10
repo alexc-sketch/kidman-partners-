@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidmans Partners - Business Advisory Wireframe</title>
+    <style>
+        /* Shared Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #2E2E2E; background-color: #FFFFFF; }
+        
+        /* Annotations */
+        .annotation-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #00A0B0; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: 700; font-size: 14px; }
+        .annotation { display: none; background: #FFF3CD; border-left: 4px solid #D4A574; padding: 12px; margin: 12px 0; font-size: 12px; color: #333; font-family: 'Courier New', monospace; }
+        .annotation.show { display: block; }
+        .annotation-label { font-weight: 700; color: #D4A574; margin-bottom: 4px; }
+
+        /* Navigation */
+        nav { background: #2E2E2E; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-weight: 700; font-size: 18px; }
+        nav ul { display: flex; list-style: none; gap: 32px; }
+        nav a { color: white; text-decoration: none; font-size: 14px; }
+        nav .cta-button { background: #00A0B0; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: 700; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #003D7A 0%, #0099D8 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: 0 auto 32px; }
+        .hero .btn { background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; font-weight: 700; display: inline-block; }
+
+        /* Lifecycle Tabs Section */
+        .lifecycle { padding: 80px 40px; background: #F5F5F5; }
+        .lifecycle-container { max-width: 1000px; margin: 0 auto; }
+        .lifecycle h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 40px; color: #003D7A; }
+        
+        .tabs { display: flex; border-bottom: 2px solid #E0E0E0; margin-bottom: 40px; }
+        .tab-btn { flex: 1; padding: 16px; text-align: center; background: none; border: none; font-size: 18px; font-weight: 600; color: #666; cursor: pointer; position: relative; }
+        .tab-btn.active { color: #00A0B0; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 4px; background: #00A0B0; }
+        
+        .tab-content { display: none; background: white; padding: 40px; border: 1px solid #E0E0E0; }
+        .tab-content.active { display: block; }
+        .tab-content h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: #D4A574; margin-bottom: 16px; }
+        .tab-content p { margin-bottom: 24px; font-size: 16px; }
+        .tab-content ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tab-content li { display: flex; align-items: flex-start; gap: 12px; }
+        .tab-content li::before { content: '✓'; color: #00A0B0; font-weight: bold; }
+
+        /* Services Grid */
+        .services { padding: 80px 40px; }
+        .services-container { max-width: 1200px; margin: 0 auto; }
+        .services h2 { font-family: 'Playfair Display', serif; font-size: 36px; text-align: center; margin-bottom: 60px; color: #003D7A; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .service-item { padding: 32px; border: 1px solid #E0E0E0; background: #F9F9F9; }
+        .service-item h3 { font-size: 20px; margin-bottom: 16px; color: #00A0B0; }
+
+        /* Footer */
+        footer { background: #2E2E2E; color: white; padding: 40px; text-align: center; }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .tabs { flex-direction: column; border-bottom: none; }
+            .tab-btn { border: 1px solid #E0E0E0; margin-bottom: 8px; background: white; }
+            .tab-btn.active::after { display: none; }
+            .tab-btn.active { background: #00A0B0; color: white; border-color: #00A0B0; }
+            .tab-content ul { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 16px; }
+            nav ul { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="annotation-toggle" onclick="toggleAnnotations()">Show Annotations</button>
+
+    <nav>
+        <div class="logo">KIDMANS PARTNERS</div>
+        <ul>
+            <li><a href="index.html">← Back to Index</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Our Clientele</a></li>
+        </ul>
+        <button class="cta-button">Book a Discovery Call</button>
+    </nav>
+
+    <section class="hero">
+        <h1>Business Advisory & Mentoring</h1>
+        <p>Turn complex numbers into a clear, actionable plan. We act as your long-term partner, combining clear financial insight with practical business mentoring and accountability.</p>
+        <a href="#" class="btn">Book an Advisory Session</a>
+    </section>
+
+    <section class="lifecycle">
+        <div class="lifecycle-container">
+            <h2>Guidance for Your Stage of the Journey</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('startups')">Start-ups</button>
+                <button class="tab-btn" onclick="openTab('established')">Established</button>
+                <button class="tab-btn" onclick="openTab('exit')">Exit-focused</button>
+            </div>
+            
+            <div id="startups" class="tab-content active">
+                <h3>Start-ups</h3>
+                <p>Take the opportunity to get the business setup correctly from the start. Avoid making costly structural mistakes that have to be undone at a later stage.</p>
+                <ul>
+                    <li>Business concept development</li>
+                    <li>Optimal structuring advice</li>
+                    <li>Initial cash flow forecasting</li>
+                    <li>Compliance and registration</li>
+                </ul>
+            </div>
+            
+            <div id="established" class="tab-content">
+                <h3>Established Businesses</h3>
+                <p>Move from "busy" to clear and in control. We help you overcome decision fatigue, pricing confusion, and cash flow stress with robust profitability analysis.</p>
+                <ul>
+                    <li>Strategic planning & roadmaps</li>
+                    <li>Profitability analysis by product/team</li>
+                    <li>Management reporting dashboards</li>
+                    <li>Growth and expansion planning</li>
+                </ul>
+            </div>
+            
+            <div id="exit" class="tab-content">
+                <h3>Exit-focused</h3>
+                <p>Maximize the value of your life's work. We help you prepare your business for sale or succession, ensuring you extract maximum value on your terms.</p>
+                <ul>
+                    <li>Business valuation</li>
+                    <li>Succession planning</li>
+                    <li>Tax-effective exit strategies</li>
+                    <li>Due diligence preparation</li>
+                </ul>
+            </div>
+        </div>
+        <div class="annotation">
+            <div class="annotation-label">LIFECYCLE TABS</div>
+            <strong>Interaction:</strong> JavaScript tabs to switch between business stages without leaving the page<br>
+            <strong>Mobile:</strong> Tabs convert to stacked accordion buttons for better touch targets<br>
+            <strong>Content:</strong> Directly addresses the specific needs of the user based on their current situation
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-container">
+            <h2>What Our Advisory Services Cover</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>Strategic Planning</h3>
+                    <p>Define your direction, establish clear priorities, and build a concrete roadmap for the next 12 to 24 months.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Budgeting & Forecasting</h3>
+                    <p>Translate your business goals into hard numbers. We help you build budgets and track performance accurately.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Cash Flow Forecasting</h3>
+                    <p>Identify financial pressure points early. We help you plan for seasonality, scaling costs, and sustainable growth.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Profitability Analysis</h3>
+                    <p>Understand your exact margins by product, team, or location so you know exactly where to double down.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Management Reporting</h3>
+                    <p>Build a reporting rhythm with monthly or quarterly dashboards and expert commentary that drives immediate action.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Growth Planning</h3>
+                    <p>Secure the support you need for confident hiring, location expansion, investment decisions, and funding readiness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kidmans Partners. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnnotations() {
+            const annotations = document.querySelectorAll('.annotation');
+            const button = document.querySelector('.annotation-toggle');
+            let showing = button.textContent === 'Hide Annotations';
+            annotations.forEach(ann => ann.classList.toggle('show'));
+            button.textContent = showing ? 'Show Annotations' : 'Hide Annotations';
+        }
+
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
