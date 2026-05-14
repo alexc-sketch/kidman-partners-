@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Advisory — Service Finder (Layout Comparison)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+
+:root{
+  --teal:#00A0B0;
+  --teal-dk:#007A88;
+  --teal-bg:rgba(0,160,176,0.09);
+  --charcoal:#181818;
+  --ink:#2C2C2C;
+  --mid:#6B6B6B;
+  --faint:#9A9A9A;
+  --page:#F3F2EE;
+  --white:#FFFFFF;
+  --border:rgba(0,0,0,0.09);
+  --border-md:rgba(0,0,0,0.14);
+  --radius:14px;
+  --radius-sm:9px;
+}
+
+body{
+  font-family:'DM Sans',-apple-system,sans-serif;
+  background:var(--page);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:40px 20px 64px;
+}
+
+.finder{width:100%;max-width:680px}
+
+/* ── Layout compare tabs ── */
+.layout-compare{
+  display:flex;
+  gap:4px;
+  background:rgba(0,0,0,0.065);
+  border-radius:11px;
+  padding:4px;
+  margin-bottom:28px;
+}
+.lc-tab{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 10px;border-radius:8px;border:none;
+  background:transparent;font-family:inherit;
+  font-size:12.5px;font-weight:500;color:var(--mid);
+  cursor:pointer;transition:background .2s,color .18s,box-shadow .2s;
+  line-height:1.2;
+}
+.lc-tab:hover:not(.lc-active){color:var(--charcoal)}
+.lc-tab.lc-active{
+  background:var(--white);color:var(--charcoal);
+  box-shadow:0 1px 4px rgba(0,0,0,.1);
+}
+.lc-tab-icon{font-size:15px;flex-shrink:0}
+.lc-tab-text{text-align:left}
+.lc-tab-label{display:block;font-weight:500}
+.lc-tab-sub{display:block;font-size:11px;font-weight:400;color:var(--faint);margin-top:1px}
+.lc-tab.lc-active .lc-tab-sub{color:var(--mid)}
+
+/* ════════════════════════════════
+   LAYOUT C — STICKY TABS
+   ════════════════════════════════ */
+.sf-wrap{display:none;animation:screenIn .34s ease both}
+
+/* Sticky stage bar — position:sticky; top:0 keeps nav visible while scrolling */
+.sf-bar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  box-shadow:0 2px 8px rgba(0,0,0,.06); /* separates bar from content on scroll */
+  overflow:hidden;
+  margin-bottom:0;
+}
+.sf-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+.sf-tab{
+  padding:17px 10px 15px;
+  text-align:center;
+  border:none;background:none;
+  font-family:inherit;font-size:13.5px;font-weight:400;
+  color:var(--mid);cursor:pointer;
+  border-bottom:2.5px solid transparent;
+  transition:color .18s,border-color .18s,background .15s;
+  user-select:none;
+}
+.sf-tab:hover:not(.sf-on){color:var(--charcoal);background:rgba(0,0,0,.02)}
+.sf-tab.sf-on{color:var(--teal);font-weight:500;border-bottom-color:var(--teal)}
+.sf-tab-sub{display:block;font-size:11px;color:var(--faint);margin-top:2px;font-weight:400}
+.sf-tab.sf-on .sf-tab-sub{color:rgba(0,160,176,.65)}
+
+/* Filter chips — scroll with content, sit just below sticky bar */
+.sf-chips{
+  display:flex;gap:8px;flex-wrap:wrap;
+  padding:16px 0 20px;
+  background:var(--page); /* match page bg so chips feel native */
+}
+.sf-chip{
+  padding:7px 15px;border-radius:30px;
+  border:1.5px solid var(--border-md);
+  background:var(--white);
+  font-family:inherit;font-size:12.5px;font-weight:400;color:var(--mid);
+  cursor:pointer;white-space:nowrap;
+  transition:border-color .16s,color .16s,background .16s;
+  user-select:none;
+}
+.sf-chip:hover{border-color:rgba(0,160,176,.4);color:var(--charcoal)}
+.sf-chip.sf-chip-on{
+  border-color:var(--teal);background:var(--teal-bg);
+  color:var(--teal);font-weight:500;
+}
+
+/* Service grid — 2-col cards */
+.sf-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:28px;
+  animation:screenIn .26s ease both;
+}
+.sf-card{
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px 18px 18px;
+  text-decoration:none;display:block;position:relative;
+  transition:border-color .18s,transform .14s,box-shadow .18s;
+}
+.sf-card:hover{
+  border-color:rgba(0,160,176,.4);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+.sf-badge{
+  position:absolute;top:13px;right:13px;
+  font-size:10px;font-weight:500;letter-spacing:.07em;
+  text-transform:uppercase;padding:3px 8px;border-radius:20px;
+}
+.sf-badge-start{background:var(--teal);color:#fff}
+.sf-badge-rec{background:rgba(0,160,176,.12);color:var(--teal-dk)}
+.sf-badge-also{background:#EEEEE9;color:var(--mid)}
+.sf-card-tag{font-size:11px;color:var(--teal);font-weight:500;letter-spacing:.04em;margin-bottom:7px}
+.sf-card-name{
+  font-size:14px;font-weight:500;color:var(--charcoal);
+  line-height:1.3;margin-bottom:7px;padding-right:64px;
+}
+.sf-card-desc{font-size:12px;color:var(--mid);line-height:1.5}
+
+/* CTA row */
+.sf-cta{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:24px 0 0;border-top:1px solid var(--border);
+  margin-top:4px;
+}
+.sf-note{font-size:13px;color:var(--faint)}
+
+/* Hide wizard chrome when Layout C active */
+.c-mode .prog-track,
+.c-mode .prog-meta,
+.c-mode .screen-wrap{display:none}
+.c-mode .sf-wrap{display:block}
+
+@media(max-width:500px){
+  .sf-tabs{grid-template-columns:1fr}
+  .sf-tab{
+    border-bottom:none;border-left:2.5px solid transparent;
+    text-align:left;padding:13px 16px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .sf-tab.sf-on{border-left-color:var(--teal);border-bottom:none}
+  .sf-tab-sub{display:none}
+  .sf-grid{grid-template-columns:1fr}
+}
+
+/* ── Brand bar ── */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:32px;padding:0 2px}
+.brand-mark{width:30px;height:30px;background:var(--teal);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-mark svg{display:block}
+.brand-name{font-size:13.5px;font-weight:500;color:var(--charcoal);letter-spacing:.01em}
+.brand-pipe{width:1px;height:13px;background:var(--border-md);margin:0 2px}
+.brand-label{font-size:13px;color:var(--mid)}
+
+/* ── Progress ── */
+.prog-track{height:2px;background:rgba(0,0,0,0.07);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.prog-fill{height:100%;background:var(--teal);border-radius:2px;width:0%;transition:width .55s cubic-bezier(.4,0,.2,1)}
+.prog-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;min-height:26px}
+.prog-step{font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.back-btn{display:none;align-items:center;gap:5px;font-size:13px;color:var(--mid);background:none;border:none;font-family:inherit;cursor:pointer;padding:4px 0;transition:color .15s}
+.back-btn:hover{color:var(--charcoal)}
+.back-btn svg{transition:transform .15s}
+.back-btn:hover svg{transform:translateX(-2px)}
+.back-btn.show{display:flex}
+
+/* ── Screen system ── */
+.screen-wrap{position:relative}
+.screen{display:none}
+.screen.is-active{display:block;animation:screenIn .34s cubic-bezier(.25,.46,.45,.94) both}
+.screen.is-exit{display:block;position:absolute;top:0;left:0;right:0;pointer-events:none;animation:screenOut .28s ease both}
+@keyframes screenIn{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@keyframes screenOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-7px)}}
+
+/* ── Screen typography ── */
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.headline{font-family:'Playfair Display',Georgia,serif;font-size:27px;font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:10px}
+.subline{font-size:14.5px;color:var(--mid);line-height:1.65;margin-bottom:28px;max-width:480px}
+
+/* ════════════════════════════════
+   VERTICAL OPTION CARDS (default)
+   ════════════════════════════════ */
+.options{display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:flex;align-items:center;gap:15px;
+  padding:17px 18px;
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);cursor:pointer;
+  transition:border-color .18s,transform .14s,background .18s;user-select:none;
+}
+.opt:hover{border-color:rgba(0,160,176,.38);transform:translateY(-1px)}
+.opt.selected{border-color:var(--teal);background:var(--teal-bg)}
+.opt-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:#EEEEE9;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;font-size:19px;
+  transition:background .18s;
+}
+.opt.selected .opt-icon{background:rgba(0,160,176,.16)}
+.opt-body{flex:1;min-width:0}
+.opt-title{font-size:14.5px;font-weight:500;color:var(--charcoal);margin-bottom:2px;line-height:1.3}
+.opt-desc{font-size:12.5px;color:var(--mid);line-height:1.45}
+.opt-ring{
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid rgba(0,0,0,.18);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .18s,border-color .18s;
+}
+.opt.selected .opt-ring{background:var(--teal);border-color:var(--teal)}
+.opt-ring svg{display:none}
+.opt.selected .opt-ring svg{display:block}
+
+/* ════════════════════════════════
+   HORIZONTAL GRID CARDS (h-mode)
+   ════════════════════════════════ */
+.h-mode .options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:10px;
+}
+/* 4-option screens → 2×2 */
+.h-mode .options.opts-4{
+  grid-template-columns:1fr 1fr;
+}
+.h-mode .opt{
+  flex-direction:column;align-items:center;text-align:center;
+  padding:26px 16px 20px;gap:0;position:relative;
+}
+.h-mode .opt:hover{transform:translateY(-2px)}
+.h-mode .opt-icon{
+  width:52px;height:52px;border-radius:14px;font-size:24px;
+  margin-bottom:14px;
+}
+.h-mode .opt-body{width:100%}
+.h-mode .opt-title{font-size:13.5px;font-weight:500;line-height:1.35;margin-bottom:5px}
+.h-mode .opt-desc{font-size:12px;line-height:1.45;color:var(--mid)}
+.h-mode .opt-ring{
+  position:absolute;top:12px;right:12px;
+  width:18px;height:18px;
+}
+/* Selected state tick */
+.h-mode .opt.selected::after{
+  content:'';position:absolute;inset:0;
+  border-radius:var(--radius-sm);
+  box-shadow:inset 0 0 0 1.5px var(--teal);
+  pointer-events:none;
+}
+
+/* ── Intro hero ── */
+.hero{
+  background:var(--charcoal);border-radius:var(--radius);
+  padding:52px 48px;color:#fff;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(0,160,176,.1)}
+.hero::after{content:'';position:absolute;bottom:-100px;right:60px;width:200px;height:200px;border-radius:50%;background:rgba(0,160,176,.05)}
+.hero-eye{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px;font-weight:500}
+.hero-h{font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:400;line-height:1.22;margin-bottom:16px;position:relative;z-index:1}
+.hero-h em{font-style:italic;color:#5DCAA5}
+.hero-sub{font-size:14.5px;color:rgba(255,255,255,.58);line-height:1.68;max-width:390px;margin-bottom:36px;position:relative;z-index:1}
+.hero-stats{display:flex;gap:32px;margin-bottom:38px;position:relative;z-index:1}
+.stat-n{font-family:'Playfair Display',serif;font-size:26px;color:#fff;display:block;line-height:1}
+.stat-l{font-size:12px;color:rgba(255,255,255,.38);margin-top:4px}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--teal);color:#fff;border:none;
+  padding:14px 26px;font-size:14px;font-weight:500;
+  font-family:inherit;border-radius:8px;cursor:pointer;
+  transition:background .18s,transform .1s;position:relative;z-index:1;
+}
+.hero-cta:hover{background:var(--teal-dk)}
+.hero-cta:active{transform:scale(.98)}
+
+/* ── Results ── */
+.results-head{background:var(--charcoal);border-radius:var(--radius) var(--radius) 0 0;padding:32px 38px 30px;color:#fff}
+.results-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px}
+.results-h{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;line-height:1.35;margin-bottom:10px}
+.results-sum{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.65;max-width:490px}
+.results-body{background:var(--white);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:32px 38px 36px}
+.pri-section{margin-bottom:26px}
+.pri-label{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.pri-tag{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:30px;white-space:nowrap}
+.tag-start{background:var(--teal);color:#fff}
+.tag-rec{background:rgba(0,160,176,.12);color:var(--teal-dk)}
+.tag-also{background:#EEEEE9;color:var(--mid)}
+.pri-rule{flex:1;height:1px;background:rgba(0,0,0,.06)}
+.svc-list{display:flex;flex-direction:column;gap:8px}
+.svc{display:flex;gap:14px;padding:14px 16px;background:#F9F8F5;border-radius:8px;border:1px solid rgba(0,0,0,.05)}
+.svc-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;margin-top:7px;flex-shrink:0}
+.svc-tag{font-size:11px;color:var(--teal);font-weight:500;letter-spacing:.04em;margin-bottom:3px}
+.svc-name{font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px}
+.svc-link{color:var(--charcoal);text-decoration:none;transition:color .15s;display:block}
+.svc-link:hover{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+.svc-desc{font-size:12.5px;color:var(--mid);line-height:1.52}
+.results-rule{height:1px;background:rgba(0,0,0,.07);margin:28px 0}
+.cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:none;padding:13px 24px;font-size:14px;font-weight:500;font-family:inherit;border-radius:8px;cursor:pointer;transition:background .18s;text-decoration:none}
+.btn-primary:hover{background:var(--teal-dk)}
+.btn-ghost{font-size:13px;color:var(--mid);cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(0,0,0,.18);transition:color .15s}
+.btn-ghost:hover{color:var(--charcoal)}
+.finder-foot{margin-top:22px;text-align:center;font-size:11.5px;color:rgba(0,0,0,.3);line-height:1.5}
+
+/* ── Mobile ── */
+@media(max-width:500px){
+  body{padding:24px 14px 48px}
+  .hero{padding:36px 26px}
+  .hero-h{font-size:28px}
+  .headline{font-size:22px}
+  .results-head{padding:24px 22px 22px}
+  .results-body{padding:22px 22px 28px}
+  .hero-stats{gap:20px}
+  .h-mode .options,.h-mode .options.opts-4{grid-template-columns:1fr 1fr}
+  .lc-tab-sub{display:none}
+}
+</style>
+</head>
+<body>
+<div class="finder" id="finder">
+
+  <!-- Layout comparison tabs -->
+  <div class="layout-compare">
+    <button class="lc-tab lc-active" id="lcTabA" onclick="setLayout('v')">
+      <span class="lc-tab-icon">☰</span>
+      <span class="lc-tab-text">
+        <span class="lc-tab-label">Layout A</span>
+        <span class="lc-tab-sub">Vertical list</span>
+      </span>
+    </button>
+    <button class="lc-tab" id="lcTabB" onclick="setLayout('h')">
+      <span class="lc-tab-icon">⊞</span>
+      <span class="lc-tab-text">
+        <span class="lc-tab-label">Layout B</span>
+        <span class="lc-tab-sub">Horizontal grid</span>
+      </span>
+    </button>
+    <button class="lc-tab" id="lcTabC" onclick="setLayout('c')">
+      <span class="lc-tab-icon">📌</span>
+      <span class="lc-tab-text">
+        <span class="lc-tab-label">Layout C</span>
+        <span class="lc-tab-sub">Sticky tabs</span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Brand -->
+  <div class="brand">
+    <div class="brand-mark">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="1" width="5" height="5" fill="white" opacity=".95"/>
+        <rect x="8" y="1" width="5" height="5" fill="white" opacity=".45"/>
+        <rect x="1" y="8" width="5" height="5" fill="white" opacity=".45"/>
+        <rect x="8" y="8" width="5" height="5" fill="white" opacity=".95"/>
+      </svg>
+    </div>
+    <span class="brand-name">Advisory Group</span>
+    <div class="brand-pipe"></div>
+    <span class="brand-label">Service Finder</span>
+  </div>
+
+  <!-- Progress -->
+  <div class="prog-track"><div class="prog-fill" id="pFill"></div></div>
+  <div class="prog-meta">
+    <button class="back-btn" id="backBtn" onclick="goBack()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 2L4 6.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </button>
+    <span class="prog-step" id="stepLbl"></span>
+  </div>
+
+  <!-- Screens -->
+  <div class="screen-wrap" id="wrap">
+
+    <!-- 0 · Intro -->
+    <div class="screen is-active" id="s0">
+      <div class="hero">
+        <p class="hero-eye">Business Advisory</p>
+        <h1 class="hero-h">Find the services<br><em>built for your stage.</em></h1>
+        <p class="hero-sub">Three quick questions. A personalised map of the advisory services most relevant to where you are right now.</p>
+        <div class="hero-stats">
+          <div><span class="stat-n">3</span><span class="stat-l">Questions</span></div>
+          <div><span class="stat-n">60s</span><span class="stat-l">To complete</span></div>
+          <div><span class="stat-n">100%</span><span class="stat-l">Personalised</span></div>
+        </div>
+        <button class="hero-cta" onclick="go('s1')">
+          Find my services
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M10.5 6.5L6.5 2.5M10.5 6.5L6.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 1 · Stage -->
+    <div class="screen" id="s1">
+      <p class="eyebrow">Question 1 of 3</p>
+      <h2 class="headline">What stage is your business at?</h2>
+      <p class="subline">This shapes everything — we only surface what's genuinely relevant to where you are right now.</p>
+      <div class="options">
+        <div class="opt" onclick="pick('stage','startup',this)">
+          <div class="opt-icon">🌱</div>
+          <div class="opt-body"><div class="opt-title">Start-up</div><div class="opt-desc">Under 3 years old — building foundations and finding your footing</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('stage','established',this)">
+          <div class="opt-icon">📈</div>
+          <div class="opt-body"><div class="opt-title">Established</div><div class="opt-desc">3+ years in, generating revenue, focused on growth and optimisation</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('stage','exit',this)">
+          <div class="opt-icon">🚪</div>
+          <div class="opt-body"><div class="opt-title">Exit-focused</div><div class="opt-desc">Planning a sale, succession, or ownership transition in the near future</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2a · Start-up challenge -->
+    <div class="screen" id="s2-startup">
+      <p class="eyebrow">Question 2 of 3</p>
+      <h2 class="headline">What's holding you back the most?</h2>
+      <p class="subline">We'll prioritise the services that solve your most pressing problem first.</p>
+      <div class="options opts-4">
+        <div class="opt" onclick="pick('challenge','structure',this)">
+          <div class="opt-icon">🏗️</div>
+          <div class="opt-body"><div class="opt-title">Getting the structure right</div><div class="opt-desc">Entity type, legal setup, tax registrations — done properly from the start</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','cashflow',this)">
+          <div class="opt-icon">💸</div>
+          <div class="opt-body"><div class="opt-title">Cash flow & financial control</div><div class="opt-desc">Better visibility and planning around money — can't afford to be caught short</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','funding',this)">
+          <div class="opt-icon">🔍</div>
+          <div class="opt-body"><div class="opt-title">Finding funding or grants</div><div class="opt-desc">Access capital or government incentives I may not know about</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','all',this)">
+          <div class="opt-icon">🎯</div>
+          <div class="opt-body"><div class="opt-title">All of the above / not sure</div><div class="opt-desc">Show me everything relevant for a business at my stage</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2b · Established focus -->
+    <div class="screen" id="s2-established">
+      <p class="eyebrow">Question 2 of 3</p>
+      <h2 class="headline">Where are you focused right now?</h2>
+      <p class="subline">Your priority determines which services will have the highest impact on your business today.</p>
+      <div class="options opts-4">
+        <div class="opt" onclick="pick('challenge','scaling',this)">
+          <div class="opt-icon">🚀</div>
+          <div class="opt-body"><div class="opt-title">Scaling & growing faster</div><div class="opt-desc">Revenue is there — I want to expand confidently and strategically</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','compliance',this)">
+          <div class="opt-icon">✅</div>
+          <div class="opt-body"><div class="opt-title">Staying on top of compliance</div><div class="opt-desc">Payroll, tax, super, Fair Work — I want to be fully protected</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','finance',this)">
+          <div class="opt-icon">🏦</div>
+          <div class="opt-body"><div class="opt-title">Accessing the right finance</div><div class="opt-desc">Debt, equity, or refinancing at the right cost for my stage</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','margins',this)">
+          <div class="opt-icon">📊</div>
+          <div class="opt-body"><div class="opt-title">Improving margins & profitability</div><div class="opt-desc">Turnover is fine — I want to keep significantly more of it</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2c · Exit type -->
+    <div class="screen" id="s2-exit">
+      <p class="eyebrow">Question 2 of 3</p>
+      <h2 class="headline">What type of transition are you considering?</h2>
+      <p class="subline">The right advisory approach differs significantly depending on the exit route.</p>
+      <div class="options opts-4">
+        <div class="opt" onclick="pick('challenge','trade',this)">
+          <div class="opt-icon">🤝</div>
+          <div class="opt-body"><div class="opt-title">Trade sale</div><div class="opt-desc">Selling to a strategic buyer, competitor, or private equity firm</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','succession',this)">
+          <div class="opt-icon">👨‍👩‍👧</div>
+          <div class="opt-body"><div class="opt-title">Family or staff succession</div><div class="opt-desc">Transferring ownership to a family member or long-term employee</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','mbo',this)">
+          <div class="opt-icon">🔄</div>
+          <div class="opt-body"><div class="opt-title">Management buyout</div><div class="opt-desc">Your existing management team acquires the business from you</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('challenge','notsure',this)">
+          <div class="opt-icon">💭</div>
+          <div class="opt-body"><div class="opt-title">Still figuring it out</div><div class="opt-desc">I know I want to exit eventually — I need help understanding my options</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3a · Start-up timeline -->
+    <div class="screen" id="s3-startup">
+      <p class="eyebrow">Question 3 of 3</p>
+      <h2 class="headline">How long have you been in business?</h2>
+      <p class="subline">This calibrates the specific services most appropriate for exactly where you are.</p>
+      <div class="options">
+        <div class="opt" onclick="pick('detail','prerevenue',this)">
+          <div class="opt-icon">✨</div>
+          <div class="opt-body"><div class="opt-title">Still pre-revenue</div><div class="opt-desc">Just getting started — haven't traded yet, or only very recently launched</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','under18',this)">
+          <div class="opt-icon">📅</div>
+          <div class="opt-body"><div class="opt-title">6 to 18 months in</div><div class="opt-desc">Trading and generating some revenue — still finding our rhythm</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','over18',this)">
+          <div class="opt-icon">⏱️</div>
+          <div class="opt-body"><div class="opt-title">18 months to 3 years</div><div class="opt-desc">Established but still in start-up mindset — scaling confidently is next</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3b · Established team size -->
+    <div class="screen" id="s3-established">
+      <p class="eyebrow">Question 3 of 3</p>
+      <h2 class="headline">How big is your team?</h2>
+      <p class="subline">Team size shapes the complexity of payroll, compliance, and operational advisory requirements.</p>
+      <div class="options">
+        <div class="opt" onclick="pick('detail','small',this)">
+          <div class="opt-icon">👤</div>
+          <div class="opt-body"><div class="opt-title">Just me, or 1 to 5 people</div><div class="opt-desc">Small, lean team — everyone wears multiple hats and we move fast</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','medium',this)">
+          <div class="opt-icon">👥</div>
+          <div class="opt-body"><div class="opt-title">6 to 20 people</div><div class="opt-desc">Growing team with increasing HR and compliance complexity</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','large',this)">
+          <div class="opt-icon">🏢</div>
+          <div class="opt-body"><div class="opt-title">More than 20 people</div><div class="opt-desc">Significant headcount — structure and systems are a genuine priority</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3c · Exit timeframe -->
+    <div class="screen" id="s3-exit">
+      <p class="eyebrow">Question 3 of 3</p>
+      <h2 class="headline">What's your target timeframe?</h2>
+      <p class="subline">The urgency of your exit significantly changes the advisory priorities and where we start immediately.</p>
+      <div class="options">
+        <div class="opt" onclick="pick('detail','soon',this)">
+          <div class="opt-icon">⚡</div>
+          <div class="opt-body"><div class="opt-title">Within the next 1 to 2 years</div><div class="opt-desc">I want to move relatively soon — preparation can't wait</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','mid',this)">
+          <div class="opt-icon">🗓️</div>
+          <div class="opt-body"><div class="opt-title">3 to 5 years from now</div><div class="opt-desc">I have time to build value before exiting — and I want to use every bit of it</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="opt" onclick="pick('detail','exploring',this)">
+          <div class="opt-icon">🔭</div>
+          <div class="opt-body"><div class="opt-title">Just exploring my options</div><div class="opt-desc">No fixed timeline — I want to understand what's possible first</div></div>
+          <div class="opt-ring"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.7L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Results -->
+    <div class="screen" id="s4">
+      <div class="results-head">
+        <div class="results-badge" id="rBadge">📋 Your personalised plan</div>
+        <h2 class="results-h" id="rHead">Your recommended services</h2>
+        <p class="results-sum" id="rSum"></p>
+      </div>
+      <div class="results-body">
+        <div class="pri-section">
+          <div class="pri-label"><span class="pri-tag tag-start">Start here</span><div class="pri-rule"></div></div>
+          <div class="svc-list" id="rPrimary"></div>
+        </div>
+        <div class="pri-section">
+          <div class="pri-label"><span class="pri-tag tag-rec">Recommended</span><div class="pri-rule"></div></div>
+          <div class="svc-list" id="rSecondary"></div>
+        </div>
+        <div class="pri-section">
+          <div class="pri-label"><span class="pri-tag tag-also">Also consider</span><div class="pri-rule"></div></div>
+          <div class="svc-list" id="rAlso"></div>
+        </div>
+        <div class="results-rule"></div>
+        <div class="cta-row">
+          <a href="/contact" class="btn-primary">
+            Speak to an advisor
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M10.5 6.5L6.5 2.5M10.5 6.5L6.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button class="btn-ghost" onclick="restart()">Start over</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+
+  <!-- ── Layout C: Sticky Tabs ── -->
+  <div class="sf-wrap" id="layoutC">
+
+    <p class="eyebrow" style="margin-bottom:10px">Business Advisory</p>
+    <h2 class="headline" style="margin-bottom:8px">Find your services at a glance.</h2>
+    <p class="subline" style="margin-bottom:24px">Select your business stage below — the tab bar sticks as you scroll. Filter by focus area to narrow the results.</p>
+
+    <!-- Sticky tab bar -->
+    <div class="sf-bar">
+      <div class="sf-tabs">
+        <button class="sf-tab sf-on" id="sft-startup" onclick="sfStage('startup',this)">
+          Start-ups
+          <span class="sf-tab-sub">Formation &amp; early growth</span>
+        </button>
+        <button class="sf-tab" id="sft-established" onclick="sfStage('established',this)">
+          Established
+          <span class="sf-tab-sub">Scaling &amp; optimisation</span>
+        </button>
+        <button class="sf-tab" id="sft-exit" onclick="sfStage('exit',this)">
+          Exit-focused
+          <span class="sf-tab-sub">Succession &amp; transition</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter chips — scroll with content -->
+    <div class="sf-chips" id="sfChips"></div>
+
+    <!-- Service cards grid -->
+    <div class="sf-grid" id="sfGrid"></div>
+
+    <!-- CTA -->
+    <div class="sf-cta">
+      <a href="/contact" class="btn-primary">
+        Speak to an advisor
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M10.5 6.5L6.5 2.5M10.5 6.5L6.5 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <span class="sf-note">No obligation — first conversation is free.</span>
+    </div>
+
+  </div><!-- /layoutC -->
+
+  <div class="finder-foot">Responses are used only to personalise your recommendations. Nothing is stored or shared.</div>
+</div>
+
+<script>
+// ─── State ───────────────────────────────────────────────
+const S = { stage:null, challenge:null, detail:null };
+let cur = 's0';
+const hist = ['s0'];
+let layout = 'v';
+
+// ─── Layout switcher ─────────────────────────────────────
+function setLayout(mode) {
+  layout = mode;
+  const finder = document.getElementById('finder');
+  finder.classList.toggle('h-mode', mode === 'h');
+  finder.classList.toggle('c-mode', mode === 'c');
+  document.getElementById('lcTabA').classList.toggle('lc-active', mode === 'v');
+  document.getElementById('lcTabB').classList.toggle('lc-active', mode === 'h');
+  document.getElementById('lcTabC').classList.toggle('lc-active', mode === 'c');
+  if (mode === 'c') {
+    // Reset wizard to intro so it's clean if they switch back
+    document.querySelectorAll('.screen.is-active').forEach(s => s.classList.remove('is-active'));
+    document.getElementById('s0').classList.add('is-active');
+    S.stage = null; S.challenge = null; S.detail = null;
+    hist.length = 0; hist.push('s0'); cur = 's0';
+    updateUI();
+    sfRender(); // render default state
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Layout C data ────────────────────────────────────────
+// Filter chips per stage — client can adjust labels and keys
+const SF_CHIPS = {
+  startup:     [ {k:'all',l:'All services'}, {k:'structure',l:'Structure & setup'}, {k:'cashflow',l:'Cash flow'}, {k:'funding',l:'Funding & grants'} ],
+  established: [ {k:'all',l:'All services'}, {k:'scaling',l:'Scaling & growth'}, {k:'compliance',l:'Compliance'}, {k:'finance',l:'Finance access'}, {k:'margins',l:'Margins & profit'} ],
+  exit:        [ {k:'all',l:'All services'}, {k:'trade',l:'Trade sale'}, {k:'succession',l:'Succession'}, {k:'mbo',l:'Buyout (MBO)'}, {k:'notsure',l:'Just exploring'} ],
+};
+
+// Service priority map per stage+focus — client logic lives here
+// primary = "Start here", secondary = "Recommended", also = "Also consider"
+const SF_MAP = {
+  startup: {
+    all:       { p:['advisory','taxation','bookkeeping'], s:['finance','audit'],     a:['wealth'] },
+    structure: { p:['advisory','taxation'],               s:['bookkeeping'],         a:['audit'] },
+    cashflow:  { p:['bookkeeping','advisory'],            s:['taxation'],            a:['finance'] },
+    funding:   { p:['finance','advisory'],                s:['taxation','bookkeeping'],a:['audit'] },
+  },
+  established: {
+    all:        { p:['advisory','audit','taxation'], s:['finance','bookkeeping'],  a:['wealth'] },
+    scaling:    { p:['advisory','finance'],          s:['taxation','audit'],       a:['wealth'] },
+    compliance: { p:['audit','taxation'],            s:['bookkeeping'],            a:['advisory'] },
+    finance:    { p:['finance','advisory'],          s:['audit'],                  a:['taxation'] },
+    margins:    { p:['advisory','taxation'],         s:['audit'],                  a:['bookkeeping'] },
+  },
+  exit: {
+    all:       { p:['advisory','wealth'],   s:['taxation','smsf'],    a:['audit','finance'] },
+    trade:     { p:['advisory','audit'],    s:['taxation','wealth'],  a:['finance'] },
+    succession:{ p:['advisory','wealth'],   s:['taxation','smsf'],    a:['audit'] },
+    mbo:       { p:['advisory','finance'],  s:['audit','taxation'],   a:['wealth'] },
+    notsure:   { p:['advisory','wealth'],   s:['taxation','smsf'],    a:['audit'] },
+  },
+};
+
+let sfStageKey = 'startup';
+let sfFocusKey = 'all';
+
+function sfStage(stage, btn) {
+  sfStageKey = stage;
+  sfFocusKey = 'all';
+  document.querySelectorAll('.sf-tab').forEach(t => t.classList.remove('sf-on'));
+  btn.classList.add('sf-on');
+  sfRender();
+}
+
+function sfFocus(focus, btn) {
+  sfFocusKey = focus;
+  document.querySelectorAll('.sf-chip').forEach(c => c.classList.remove('sf-chip-on'));
+  btn.classList.add('sf-chip-on');
+  sfRenderGrid();
+}
+
+function sfRender() {
+  // Render filter chips
+  const chips = SF_CHIPS[sfStageKey] || [];
+  document.getElementById('sfChips').innerHTML = chips.map(c =>
+    `<button class="sf-chip${c.k === sfFocusKey ? ' sf-chip-on':''}" onclick="sfFocus('${c.k}',this)">${c.l}</button>`
+  ).join('');
+  sfRenderGrid();
+}
+
+function sfRenderGrid() {
+  const map = (SF_MAP[sfStageKey] || {})[sfFocusKey] || { p:[], s:[], a:[] };
+  const tiers = [
+    { keys: map.p, badge:'sf-badge-start', label:'Start here' },
+    { keys: map.s, badge:'sf-badge-rec',   label:'Recommended' },
+    { keys: map.a, badge:'sf-badge-also',  label:'Also consider' },
+  ];
+  let html = '';
+  tiers.forEach(tier => {
+    (tier.keys || []).forEach(k => {
+      const sv = DB[k]; if (!sv) return;
+      html += `<a href="${sv.url}" class="sf-card">
+        <span class="sf-badge ${tier.badge}">${tier.label}</span>
+        <div class="sf-card-tag">${sv.tag}</div>
+        <div class="sf-card-name">${sv.name}</div>
+        <div class="sf-card-desc">${sv.desc}</div>
+      </a>`;
+    });
+  });
+  const grid = document.getElementById('sfGrid');
+  grid.innerHTML = html;
+  // Re-trigger animation
+  grid.style.animation = 'none';
+  void grid.offsetWidth;
+  grid.style.animation = '';
+}
+
+// ─── Services database — update URLs to match live site ──
+const DB = {
+  audit:      { tag:'Audit & Compliance',  name:'Audit, Compliance & Assurance', url:'/services/audit-compliance-assurance',  desc:'Independent review and assurance that your financial records, processes, and reporting are accurate, compliant, and built to withstand scrutiny from any regulator or stakeholder.' },
+  bookkeeping:{ tag:'Financial Systems',   name:'Bookkeeping',                    url:'/services/bookkeeping',                 desc:'Accurate, up-to-date financial records through cloud-based systems — so your numbers are always current and every business decision is based on real data.' },
+  advisory:   { tag:'Advisory',            name:'Business Advisory & Mentoring',  url:'/services/business-advisory-mentoring', desc:'Strategic advice and practical mentoring that helps you navigate decisions, plan confidently for growth, and build a more valuable business at every stage.' },
+  finance:    { tag:'Capital',             name:'Finance & Lending Services',     url:'/services/finance-lending',             desc:'Access to the right debt or equity capital at the right time — from business loans and asset finance through to commercial lending and refinancing solutions.' },
+  smsf:       { tag:'Superannuation',      name:'SMSF',                           url:'/services/smsf',                        desc:'Expert management and compliance support for your self-managed super fund — structured, compliant, and aligned with your long-term retirement and wealth goals.' },
+  taxation:   { tag:'Tax',                 name:'Taxation & Business Services',   url:'/services/taxation-business-services',  desc:'Comprehensive tax planning, lodgement, and compliance across all business structures — designed to minimise your position and keep you fully compliant year-round.' },
+  wealth:     { tag:'Wealth',              name:'Wealth Management',              url:'/services/wealth-management',           desc:'Holistic financial planning for your personal wealth — investment strategy, risk management, retirement planning, and estate planning under one roof.' },
+};
+
+// ─── Recommendation engine ────────────────────────────────
+function recommend() {
+  const { stage, challenge, detail } = S;
+  const r = { badge:'', head:'', sum:'', primary:[], secondary:[], also:[] };
+  if (stage === 'startup') {
+    r.badge = '🌱 Start-up pathway';
+    const m = { structure:{p:['advisory','taxation'],s:['bookkeeping','finance'],a:['audit'],sum:'Getting your structure right early prevents costly restructures later. We\'ve prioritised the services with the biggest long-term impact on your tax position and liability exposure.'}, cashflow:{p:['bookkeeping','advisory'],s:['taxation','finance'],a:['audit'],sum:'Cash flow is the number one reason early-stage businesses fail — but it\'s highly manageable with the right systems. We\'ve prioritised financial control and visibility for your situation.'}, funding:{p:['finance','advisory'],s:['taxation','bookkeeping'],a:['audit'],sum:'Accessing funding requires both a compelling financial story and the right structure to receive it. We\'ve prioritised the services that put you in the strongest position to secure capital.'}, all:{p:['advisory','taxation','bookkeeping'],s:['finance','audit'],a:['wealth'],sum:'For a start-up covering all bases, we\'ve built a comprehensive starting point — covering structure, financial control, and the operational systems that will serve your business for years to come.'} }[challenge] || {};
+    Object.assign(r, { primary:m.p, secondary:m.s, also:m.a, sum:m.sum });
+    r.head = { prerevenue:"Let's build your foundations correctly.", under18:"You've started — now let's build the systems that scale.", over18:"From early-stage to growth. Here's what you need." }[detail] || "Here's your personalised advisory plan.";
+  } else if (stage === 'established') {
+    r.badge = '📈 Established business pathway';
+    const m = { scaling:{p:['advisory','finance'],s:['taxation','audit'],a:['wealth'],sum:'Sustainable scaling requires clear strategy and sharp financial intelligence. We\'ve prioritised the services that give you the plan and the capital to grow without losing control of the business.'}, compliance:{p:['audit','taxation'],s:['bookkeeping','advisory'],a:['finance'],sum:'Staying compliant isn\'t just about avoiding penalties — it creates the clean foundation that supports every business decision. Here\'s where to focus to stay protected and audit-ready.'}, finance:{p:['finance','advisory'],s:['audit','taxation'],a:['bookkeeping'],sum:'Lenders and investors trust businesses with clean, current financials. We\'ve prioritised the advisory and assurance services that put you in the strongest possible position to access capital.'}, margins:{p:['advisory','taxation'],s:['audit','finance'],a:['bookkeeping'],sum:'Improving margins is often the highest-ROI work an established business can do. We\'ve focused on services that directly impact the bottom line without adding operational complexity.'} }[challenge] || {};
+    Object.assign(r, { primary:m.p, secondary:m.s, also:m.a, sum:m.sum });
+    r.head = { small:"Small team, big ambitions. Here's your advisory plan.", medium:"Managing complexity at growth stage. Here's where to focus.", large:"At your scale, the right structure is everything." }[detail] || "Here's your personalised advisory plan.";
+  } else {
+    r.badge = '🚪 Exit pathway';
+    const m = { trade:{p:['advisory','audit'],s:['taxation','wealth'],a:['finance'],sum:'A trade sale is the most complex exit — but typically the highest-value. We\'ve prioritised services that protect your price and interests throughout the process from first conversation to settlement.'}, succession:{p:['advisory','wealth'],s:['taxation','smsf'],a:['audit'],sum:'Family or staff succession requires planning around both the financial and the personal. We\'ve focused on services that protect relationships and legacy as much as they protect monetary value.'}, mbo:{p:['advisory','finance'],s:['audit','taxation'],a:['wealth'],sum:'A management buyout involves your team taking on significant risk — structuring it correctly protects both sides. Here\'s what we recommend to get the deal right from the start.'}, notsure:{p:['advisory','wealth'],s:['taxation','smsf'],a:['audit'],sum:'Even when just exploring, a current valuation and clear picture of your options is the most valuable thing you can have. Here\'s a sensible no-pressure starting point.'} }[challenge] || {};
+    Object.assign(r, { primary:m.p, secondary:m.s, also:m.a, sum:m.sum });
+    r.head = { soon:"Your exit window is open. Let's make sure you're ready.", mid:"3–5 years to build maximum exit value. Here's the plan.", exploring:"Exploring your options — with clarity and no pressure." }[detail] || "Here's your personalised advisory plan.";
+  }
+  return r;
+}
+
+// ─── Render results ───────────────────────────────────────
+function buildResults() {
+  const r = recommend();
+  document.getElementById('rBadge').textContent = r.badge;
+  document.getElementById('rHead').textContent  = r.head;
+  document.getElementById('rSum').textContent   = r.sum;
+  ['Primary','Secondary','Also'].forEach((t,i) => {
+    const keys = [r.primary, r.secondary, r.also][i];
+    document.getElementById('r'+t).innerHTML = (keys||[]).map(k => {
+      const s = DB[k];
+      return `<div class="svc"><div class="svc-dot"></div><div><div class="svc-tag">${s.tag}</div><a href="${s.url}" class="svc-name svc-link">${s.name}</a><div class="svc-desc">${s.desc}</div></div></div>`;
+    }).join('');
+  });
+}
+
+// ─── Navigation ───────────────────────────────────────────
+const PROG = { s0:0, s1:16, 's2-startup':50, 's2-established':50, 's2-exit':50, 's3-startup':83, 's3-established':83, 's3-exit':83, s4:100 };
+const STEP = { s0:'', s1:'Step 1 of 3', 's2-startup':'Step 2 of 3', 's2-established':'Step 2 of 3', 's2-exit':'Step 2 of 3', 's3-startup':'Step 3 of 3', 's3-established':'Step 3 of 3', 's3-exit':'Step 3 of 3', s4:'Your results' };
+
+function updateUI() {
+  document.getElementById('pFill').style.width = (PROG[cur]||0) + '%';
+  document.getElementById('stepLbl').textContent = STEP[cur]||'';
+  document.getElementById('backBtn').classList.toggle('show', cur !== 's0' && cur !== 's1');
+}
+
+function go(target) {
+  if (!document.getElementById(target) || cur === target) return;
+  const prev = document.getElementById(cur);
+  const next = document.getElementById(target);
+  prev.classList.remove('is-active');
+  prev.classList.add('is-exit');
+  setTimeout(() => prev.classList.remove('is-exit'), 350);
+  next.classList.add('is-active');
+  cur = target;
+  hist.push(target);
+  updateUI();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function goBack() {
+  if (hist.length <= 2) return;
+  hist.pop();
+  const prev = hist[hist.length - 1];
+  document.getElementById(cur).classList.remove('is-active');
+  document.getElementById(prev).querySelectorAll('.opt.selected').forEach(o => o.classList.remove('selected'));
+  document.getElementById(prev).classList.add('is-active');
+  cur = prev;
+  if (prev === 's1')             { S.stage=null; S.challenge=null; S.detail=null; }
+  else if (prev.startsWith('s2')){ S.challenge=null; S.detail=null; }
+  else if (prev.startsWith('s3')){ S.detail=null; }
+  updateUI();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function pick(key, val, el) {
+  S[key] = val;
+  el.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  setTimeout(() => {
+    if (key === 'stage')      go('s2-' + S.stage);
+    else if (key === 'challenge') go('s3-' + S.stage);
+    else if (key === 'detail')   { buildResults(); go('s4'); }
+  }, 360);
+}
+
+function restart() {
+  S.stage=null; S.challenge=null; S.detail=null;
+  document.querySelectorAll('.opt.selected').forEach(o => o.classList.remove('selected'));
+  document.getElementById(cur).classList.remove('is-active');
+  hist.length=0; hist.push('s0'); cur='s0';
+  document.getElementById('s0').classList.add('is-active');
+  updateUI();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+updateUI();
+</script>
+</body>
+</html>
