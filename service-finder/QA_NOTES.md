@@ -15,3 +15,9 @@ All published Service Finder HTML and Markdown files were checked for em dashes.
 ## Publication
 
 The corrected package was published in commit `580f8cb`.
+
+## Pathway Explorer QA
+
+The Pathway Explorer presents all three Business pathways and all four Personal pathways with the corresponding Step 2 and Step 3 questions, answer options, field keys, route and final outcome title. The direct Established Business reference was tested with `view=business-outcomes&path=established`; it opened the Business outcome simulator and selected the correct Established Business default outcome.
+
+The Developer Dashboard Pathway Explorer link was also checked in the repository-relative preview structure. It resolves to `pathways.html`. The standalone explorer layout displays correctly and is suitable for desktop and small screens through its responsive one- and two-column layouts.
