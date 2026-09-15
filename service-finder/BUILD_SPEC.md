@@ -1,4 +1,4 @@
-# Kidmans Partners — Service Finder Functional Build Specification
+# Kidmans Partners: Service Finder Functional Build Specification
 
 **Purpose:** Developer-ready reference for the Business and Personal Service Finder forms, dynamic outcome pages, and unstyled Gravity Forms notifications.
 
@@ -16,8 +16,8 @@
 | Answer steps | Three answer steps plus a lead-capture step |
 | Full outcome combinations | 30 Business + 45 Personal = **75** answer combinations |
 | Visual outcome templates | One Business outcome template and one Personal outcome template; data changes dynamically |
-| User confirmation emails | Seven conditional, plain-text notifications — one for each top-level pathway |
-| Admin notifications | Two plain-text notifications — one Business and one Personal |
+| User confirmation emails | Seven conditional, plain-text notifications: one for each top-level pathway |
+| Admin notifications | Two plain-text notifications: one Business and one Personal |
 | Total Gravity Forms notifications | **Nine**: 7 user confirmations + 2 admin notifications |
 | Styling of notifications | None. Use Gravity Forms plain-text notification content only. |
 
@@ -26,7 +26,7 @@
 ## 2. Global Form Behaviour
 
 1. Step 1 displays image-choice cards; it has no progress bar.
-2. Selecting an answer on steps 1–3 automatically advances to the next relevant step.
+2. Selecting an answer on steps 1 to 3 automatically advances to the next relevant step.
 3. Step 2 and Step 3 include a Back control.
 4. Step 2 is conditionally shown based on the Step 1 pathway.
 5. Step 3 is conditionally shown based on the Step 1 pathway.
@@ -37,17 +37,17 @@
 
 ---
 
-## 3. Business Service Finder — Field Map
+## 3. Business Service Finder: Field Map
 
-### Step 1 — Business Stage
+### Step 1: Business Stage
 
 | Field label | Field key | Option value | Outcome key |
 |---|---|---|---|
 | Which best describes your business right now? | `business_stage` | Start-up / New Business | `startup` |
-|  |  | Established Business | `established` |
-|  |  | Exit / Succession Planning | `exit` |
+| | | Established Business | `established` |
+| | | Exit / Succession Planning | `exit` |
 
-### Step 2 — Conditional Priority / Challenge / Exit Type
+### Step 2: Conditional Priority / Challenge / Exit Type
 
 | Condition: `business_stage` | Question | Field key | Options |
 |---|---|---|---|
@@ -55,15 +55,15 @@
 | `established` | What is your biggest challenge right now? | `established_challenge` | Improving Profitability; Reducing Tax; Planning for Growth |
 | `exit` | What type of exit are you planning? | `exit_type` | Selling to a Third Party; Family / Management Succession; Winding Down |
 
-### Step 3 — Conditional Qualifier
+### Step 3: Conditional Qualifier
 
 | Condition: `business_stage` | Question | Field key | Options |
 |---|---|---|---|
-| `startup` | How long have you been trading? | `startup_trading_age` | Pre-Revenue / Just Starting; Under 12 Months; 1–3 Years |
-| `established` | How many people are in your team? | `established_team_size` | Just Me / Sole Trader; 2–5 People; 6–20 People; 20+ People |
-| `exit` | What is your intended timeline? | `exit_timeline` | Within 12 Months; 1–3 Years; 3–5 Years |
+| `startup` | How long have you been trading? | `startup_trading_age` | Pre-Revenue / Just Starting; Under 12 Months; 1 to 3 Years |
+| `established` | How many people are in your team? | `established_team_size` | Just Me / Sole Trader; 2 to 5 People; 6 to 20 People; 20+ People |
+| `exit` | What is your intended timeline? | `exit_timeline` | Within 12 Months; 1 to 3 Years; 3 to 5 Years |
 
-### Step 4 — Lead Capture
+### Step 4: Lead Capture
 
 | Field | Key | Required |
 |---|---|---:|
@@ -85,18 +85,18 @@
 
 ---
 
-## 4. Personal Service Finder — Field Map
+## 4. Personal Service Finder: Field Map
 
-### Step 1 — Life Stage
+### Step 1: Life Stage
 
 | Field label | Field key | Option value | Outcome key |
 |---|---|---|---|
 | Which best describes your life stage right now? | `personal_stage` | Wealth Accumulator | `wealth` |
-|  |  | Pre-Retiree | `pre_retirement` |
-|  |  | Retiree | `retirement` |
-|  |  | Sudden Change | `life_change` |
+| | | Pre-Retiree | `pre_retirement` |
+| | | Retiree | `retirement` |
+| | | Sudden Change | `life_change` |
 
-### Step 2 — Conditional Goal / Concern / Priority / Need
+### Step 2: Conditional Goal / Concern / Priority / Need
 
 | Condition: `personal_stage` | Question | Field key | Options |
 |---|---|---|---|
@@ -105,16 +105,16 @@
 | `retirement` | What is most important to you right now? | `retirement_priority` | Sustainable Income; Aged Care Planning; Estate and Legacy |
 | `life_change` | What would help you most right now? | `life_change_need` | Understanding Where I Stand; Protecting What I Have; Planning What Comes Next |
 
-### Step 3 — Conditional Qualifier
+### Step 3: Conditional Qualifier
 
 | Condition: `personal_stage` | Question | Field key | Options |
 |---|---|---|---|
-| `wealth` | What is your approximate household income? | `wealth_household_income` | Under $100k; $100k–$200k; $200k–$500k; $500k+ |
-| `pre_retirement` | When do you plan to retire? | `pre_retirement_timeline` | Within 2 Years; 2–5 Years; 5–10 Years |
+| `wealth` | What is your approximate household income? | `wealth_household_income` | Under $100k; $100k to $200k; $200k to $500k; $500k+ |
+| `pre_retirement` | When do you plan to retire? | `pre_retirement_timeline` | Within 2 Years; 2 to 5 Years; 5 to 10 Years |
 | `retirement` | What is your primary income source in retirement? | `retirement_income_source` | Account-Based Pension / Super; Age Pension; Investment Income; Combination of the Above |
 | `life_change` | What best describes your situation? | `life_change_situation` | Separation or Divorce; Loss of a Partner or Family Member; Redundancy or Career Change; Inheritance or Windfall |
 
-### Step 4 — Lead Capture
+### Step 4: Lead Capture
 
 | Field | Key | Required |
 |---|---|---:|
@@ -122,7 +122,7 @@
 | Last Name | `last_name` | Yes |
 | Email Address | `email` | Yes |
 | Phone | `phone` | No |
-| Suburb | `suburb` | No — include only if Kidmans approves its use |
+| Suburb | `suburb` | No: include only if Kidmans approves its use |
 | Privacy acknowledgement | `privacy_acknowledgement` | Yes |
 
 ### Personal outcome routes
@@ -152,13 +152,13 @@ Every redirected outcome URL should receive, or retrieve from the form entry, th
 ```text
 first_name
 email
-journey_type                 # business | personal
-pathway_key                  # e.g. established | pre_retirement
+journey_type # business | personal
+pathway_key # e.g. established | pre_retirement
 step1_answer
 step2_answer
 step3_answer
 outcome_slug
-entry_id                     # optional but recommended
+entry_id # optional but recommended
 ```
 
 Recommended query-string pattern:
@@ -195,27 +195,27 @@ To keep the build maintainable, service tiers are fixed by audience rather than 
 
 ---
 
-## 7. Gravity Forms Notifications — Plain Text Only
+## 7. Gravity Forms Notifications: Plain Text Only
 
-The client has specified that no additional email styling can be applied. Configure **plain-text** Gravity Forms notifications — no HTML layout, no logo, no CSS, no design workarounds.
+The client has specified that no additional email styling can be applied. Configure **plain-text** Gravity Forms notifications: no HTML layout, no logo, no CSS, no design workarounds.
 
-### User confirmations — seven conditional notifications
+### User confirmations: seven conditional notifications
 
 Create one conditional notification for each pathway. The conditions are based on Step 1.
 
 | # | Notification name | Condition | Subject |
 |---:|---|---|---|
-| 1 | Business — Start-up plan | `business_stage = Start-up / New Business` | Your Kidmans Start-up Action Plan |
-| 2 | Business — Established plan | `business_stage = Established Business` | Your Kidmans Growth & Profitability Plan |
-| 3 | Business — Exit plan | `business_stage = Exit / Succession Planning` | Your Kidmans Exit Preparation Plan |
-| 4 | Personal — Wealth plan | `personal_stage = Wealth Accumulator` | Your Kidmans Wealth Building Plan |
-| 5 | Personal — Pre-Retirement plan | `personal_stage = Pre-Retiree` | Your Kidmans Retirement Transition Plan |
-| 6 | Personal — Retirement plan | `personal_stage = Retiree` | Your Kidmans Retirement Income Plan |
-| 7 | Personal — Financial reset plan | `personal_stage = Sudden Change` | Your Kidmans Financial Reset Plan |
+| 1 | Business: Start-up plan | `business_stage = Start-up / New Business` | Your Kidmans Start-up Action Plan |
+| 2 | Business: Established plan | `business_stage = Established Business` | Your Kidmans Growth & Profitability Plan |
+| 3 | Business: Exit plan | `business_stage = Exit / Succession Planning` | Your Kidmans Exit Preparation Plan |
+| 4 | Personal: Wealth plan | `personal_stage = Wealth Accumulator` | Your Kidmans Wealth Building Plan |
+| 5 | Personal: Pre-Retirement plan | `personal_stage = Pre-Retiree` | Your Kidmans Retirement Transition Plan |
+| 6 | Personal: Retirement plan | `personal_stage = Retiree` | Your Kidmans Retirement Income Plan |
+| 7 | Personal: Financial reset plan | `personal_stage = Sudden Change` | Your Kidmans Financial Reset Plan |
 
 Every user notification must include the exact three chosen answers, the correct outcome-page link, the static relevant service tiers, the discovery-call CTA URL, Kidmans contact details, and the approved personal-advice disclosure where relevant.
 
-### Admin notifications — two plain-text notifications
+### Admin notifications: two plain-text notifications
 
 | Notification name | Trigger | Minimum required content |
 |---|---|---|
